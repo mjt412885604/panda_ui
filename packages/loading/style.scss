@@ -1,0 +1,82 @@
+.component-loading-box {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1024;
+    background-color: transparent;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &.active {
+        display: flex;
+    }
+
+    .box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &.active {
+            min-width: 80px;
+            min-height: 80px;
+            box-shadow: 0 2px 6px 1px rgba(0, 0, 0, .05);
+            border-radius: 5px;
+            background-color: #fff;
+        }
+    }
+
+    img {
+        width: 50px;
+        animation: component-loading-rotate 3.5s infinite linear;
+    }
+
+    .message {
+        color: #999;
+        font-size: 14px;
+        text-align: center;
+        padding: 0px 15px 10px;
+    }
+
+    @keyframes component-loading-rotate {
+        0% {
+            transform: rotate(0);
+        }
+
+        12.5% {
+            transform: scale(1.2) rotate(45deg);
+        }
+
+        25% {
+            transform: scale(1) rotate(90deg);
+        }
+
+        37.5% {
+            transform: scale(1.2) rotate(135deg);
+        }
+
+        50% {
+            transform: scale(1) rotate(180deg);
+        }
+
+        62.5% {
+            transform: scale(1.2) rotate(225deg);
+        }
+
+        75% {
+            transform: scale(1) rotate(270deg);
+        }
+
+        87.5% {
+            transform: scale(1.2) rotate(315deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

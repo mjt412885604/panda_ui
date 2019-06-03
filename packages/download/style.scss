@@ -1,0 +1,37 @@
+.component-download{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: 60px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0,0,0,.6);
+    .icon{
+        font-size: 16px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        img{
+            width: 48px;
+            height: 48px;
+            margin-right: 10px;
+        }
+    }
+    .btn{
+        a{
+            display: inline-block;
+            width: 75px;
+            height: 32px;
+            color: #fff;
+            text-align: center;
+            line-height: 32px;
+            border-radius: 3px;
+            background-color: #13C7CD;
+            font-size: 14px;
+        }
+    }
+}

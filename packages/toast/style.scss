@@ -1,0 +1,59 @@
+.app-toast {
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .message {
+        padding: 18px 20px;
+        text-align: center;
+        min-width: 60px;
+        max-width: 80%;
+        background-color: rgba(0, 0, 0, .8);
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px;
+        line-height: 18px;
+        word-break: break-word;
+        position: relative;
+        z-index: 2021;
+        font-weight: 600;
+    }
+
+    .icons {
+        padding: 8px 15px;
+
+        .weui-icon_toast {
+            display: block;
+            margin-top: 0;
+        }
+    }
+}
+
+.components-toast-message {
+    &-enter {
+        opacity: 0.01;
+
+        &-active {
+            opacity: 1;
+            transition: all .1s ease-out;
+        }
+    }
+
+    &-exit {
+        opacity: 1;
+        transform: scale(1);
+
+        &-active {
+            opacity: 0.01;
+            transform: scale(0.9);
+            transition: all .2s ease-out;
+        }
+    }
+}
