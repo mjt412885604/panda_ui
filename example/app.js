@@ -9,7 +9,8 @@ import {
     TopTips,
     Download,
     Skeleton
-} from '@panda_ui/components'
+} from '../dist/pandaui'
+import '../dist/pandaui.css'
 import './main.scss'
 
 

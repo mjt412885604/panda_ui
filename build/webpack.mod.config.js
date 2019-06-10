@@ -1,10 +1,11 @@
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 const pkg = require('../package.json');
 const nodeExternals = require('webpack-node-externals')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 
 module.exports = function (entry, isMinify) {
@@ -29,6 +30,10 @@ module.exports = function (entry, isMinify) {
             'process.env': {
                 NODE_ENV: '"production"'
             }
+        }),
+        new ExtractTextPlugin({
+            filename: '[name].css',
+            allChunks: true, // 模块中提取css
         })
     ]
     if (isMinify) {
@@ -60,10 +65,28 @@ module.exports = function (entry, isMinify) {
                 exclude: /node_modules/
             }, {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true, //css压缩
+                            importLoaders: 1
+                        }
+                    }, 'postcss-loader'],
+                })
             }, {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            minimize: true, //css压缩
+                            importLoaders: 1
+                        }
+                    }, 'postcss-loader', 'sass-loader'],
+                })
             }, {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: ['url-loader?limit=8192&name=images/[name].[ext]']

@@ -225,7 +225,15 @@ export default class Picker extends React.Component {
   render() {
     // 展示 Picker
     const showPicker = () => {
-      if (this.props.disabled) return
+      if (this.props.disabled) return;
+
+      // 组件BUG修复-时间：2019-06-10
+      // 时间选择器的时候如果用户波动了时间没有点击确定的时候，下次再次选择时间选择范围将不再是时间范围内
+      // 如end = 2019-06-10，然后用户波动时间为2018-03-10但是不点击确定，用户再次打开时间选择器会1~10月
+      // 是因为每次渲染时间列表是根据this.pickerDate._updateValue来判断，而此时this.pickerDate._updateValue=[2018, 03, 10]
+      if (this.props.mode == 'date') {
+        this.pickerDate._updateValue = [...this.index]
+      }
 
       const height = this.index.map((i, idx) => {
         let factor = 0

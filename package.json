@@ -1,9 +1,8 @@
 {
   "name": "@panda_ui/components",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "熊猫儿科UI组件包",
-  "main": "dist/pandaui.js",
-  "homepage": "https://www.doctorpanda.com",
+  "main": "packages/index.js",
   "scripts": {
     "dev": "node build/dev-server.js",
     "clean": "rimraf ./dist",
@@ -14,8 +13,12 @@
   "keywords": [
     "@panda_ui/components"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjt412885604/panda_ui.git"
+  },
   "author": "mjt@770287749",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
@@ -48,7 +51,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
-    "@panda_ui/components": "^1.0.0",
+    "@panda_ui/components": "^1.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin'); //生成html
+var ExtractTextPlugin = require("extract-text-webpack-plugin"); //css单独打包
 
 
 module.exports = {
@@ -22,10 +23,28 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader', 'postcss-loader']
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true, //css压缩
+                        importLoaders: 1
+                    }
+                }, 'postcss-loader'],
+            })
         }, {
             test: /\.scss$/,
-            use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+            use: ExtractTextPlugin.extract({
+                fallback: "style-loader",
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true, //css压缩
+                        importLoaders: 1
+                    }
+                }, 'postcss-loader', 'sass-loader'],
+            })
         }, {
             test: /\.(png|jpg|gif|svg)$/,
             loader: ['url-loader?limit=8192&name=images/[name].[ext]']
@@ -35,6 +54,10 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
+        new ExtractTextPlugin({
+            filename: '[name].css',
+            allChunks: true, // 模块中提取css
+        }),
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: function () {
@@ -65,7 +88,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
+    module.exports.devtool = false
     // http://vue-loader.vuejs.org/en/workflow/production.html
     module.exports.plugins = (module.exports.plugins || []).concat([
         new webpack.DefinePlugin({
