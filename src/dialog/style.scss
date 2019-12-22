@@ -1,0 +1,119 @@
+@import '../style/colors';
+
+.body-frozen {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pandaui-dialog {
+    position: fixed;
+    z-index: 5000;
+    width: 80%;
+    max-width: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    text-align: center;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.pandaui-dialog__hd {
+    padding: 20px 20px 8px;
+}
+
+.pandaui-dialog__title {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.pandaui-dialog__bd {
+    padding: 0 20px 10px;
+    min-height: 40px;
+    font-size: 15px;
+    line-height: 1.3;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: #999999;
+}
+
+.pandaui-dialog__bd:first-child {
+    padding: 32px 20px;
+    color: #353535;
+}
+
+.pandaui-dialog__ft {
+    position: relative;
+    line-height: 48px;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.pandaui-dialog__ft:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #D5D5D6;
+    color: #D5D5D6;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.pandaui-dialog__btn {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    color: $themeColor;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: relative;
+    cursor: pointer;
+}
+
+.pandaui-dialog__btn:active {
+    background-color: #EEEEEE;
+}
+
+.pandaui-dialog__btn:after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    bottom: 0;
+    border-left: 1px solid #D5D5D6;
+    color: #D5D5D6;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+}
+
+.pandaui-dialog__btn:first-child:after {
+    display: none;
+}
+
+.pandaui-dialog__btn_default {
+    color: #353535;
+}
+
+.pandaui-dialog__btn_primary {
+    color: $themeColor;
+}
+
+@media screen and (min-width: 1024px) {
+    .pandaui-dialog {
+        width: 35%;
+    }
+}

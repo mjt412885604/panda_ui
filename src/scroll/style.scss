@@ -1,0 +1,35 @@
+@mixin pandaui-component-scroll {
+    height: 50px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #8a8a8a;
+    text-align: center;
+}
+
+.pandaui-component-scroll {
+    .load-more {
+        @include pandaui-component-scroll;
+    }
+}
+
+.pandaui-component-iscroll-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1;
+
+    >* {
+        touch-action: none;
+        transform: translateZ(0);
+    }
+
+    .load-more {
+        @include pandaui-component-scroll;
+    }
+}

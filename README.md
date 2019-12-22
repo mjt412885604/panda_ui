@@ -1,33 +1,33 @@
-# panda_ui
+# pandaui-mobile
 UI组件
 
 ## 安装
 
 ### npm
 ```npm
-npm i --save @panda_ui/components
+npm i --save pandaui-mobile
+```
+
+### yarn
+```npm
+yarn add pandaui-mobile
 ```
 
 ## 相关组件
 ```js
 export {
     ActionSheet,
+    Avatar,
     Button,
     Dialog,
-    Switch,
-    Radio,
-    Checkbox,
-    Agreement,
-    Icon,
+    Download,
+    ListEmpty,
     Loading,
     Mask,
-    Toast,
-    TopTips,
-    Avatar,
-    ListEmpty,
     Picker,
+    CityPicker,
     Scroll,
     Skeleton,
-    Download
+    Toast,
 }
 ```

@@ -1,0 +1,145 @@
+.pandaui-actionsheet {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    transform: translate(0, 100%);
+    backface-visibility: hidden;
+    z-index: 5000;
+    width: 100%;
+    background-color: #EFEFF4;
+    transition: transform .3s;
+}
+
+.pandaui-actionsheet__title {
+    position: relative;
+    height: 56px;
+    padding: 0 20px;
+    line-height: 1.4;
+    display: flex;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    background: #FCFCFD;
+}
+
+.pandaui-actionsheet__title:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.pandaui-actionsheet__title .pandaui-actionsheet__title-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.pandaui-actionsheet__menu {
+    background-color: #FCFCFD;
+}
+
+.pandaui-actionsheet__action {
+    margin-top: 6px;
+    background-color: #FCFCFD;
+}
+
+.pandaui-actionsheet__cell {
+    position: relative;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+}
+
+.pandaui-actionsheet__cell:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #e5e5e5;
+    color: #e5e5e5;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+}
+
+.pandaui-actionsheet__cell:active {
+    background-color: #ECECEC;
+}
+
+.pandaui-actionsheet__cell:first-child:before {
+    display: none;
+}
+
+.pandaui-actionsheet_toggle {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+
+.pandaui-actionsheet.active {
+    transition: none;
+}
+
+.components-actionsheet {
+    &-enter {
+        .pandaui-mask {
+            opacity: 0;
+        }
+
+        .pandaui-actionsheet {
+            transform: translate3d(0, 100%, 0);
+        }
+
+        &-active {
+            .pandaui-mask {
+                opacity: 1;
+                transition: opacity .3s;
+            }
+
+            .pandaui-actionsheet {
+                transform: translate3d(0, 0, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+
+    &-exit {
+        .pandaui-mask {
+            opacity: 1;
+        }
+
+        .pandaui-actionsheet {
+            transform: translate3d(0, 0, 0);
+        }
+
+        &-active {
+            .pandaui-mask {
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .pandaui-actionsheet {
+                transform: translate3d(0, 100%, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+}
