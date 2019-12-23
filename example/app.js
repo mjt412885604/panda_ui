@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import cnCity from './city'
 import {
   ActionSheet,
   Avatar,
@@ -11,19 +12,18 @@ import {
   CityPicker,
   Scroll,
   Skeleton,
-  Toast,
-} from 'pandaui-mobile'
-import cnCity from './city'
-import 'pandaui-mobile/lib/index.css'
+  Toast
+} from './lib'
+import './lib/index.css'
 
-let timer = null
+let timer: any = null;
 
-function App() {
+const App: React.FC = () => {
   const [show, setShow] = useState(false)
   const [empty, setEmpty] = useState(false)
   const [cityShow, setCityShow] = useState(false)
-  const [list, setList] = useState([...Array(20)])
   const [loadMore, setLoadMore] = useState(false)
+  const [list, setList] = useState([...Array(20)])
 
   const onClickEmpty = () => {
     timer && clearTimeout(timer)
@@ -37,15 +37,14 @@ function App() {
 
   }
 
+  const onChangeCityPicker = () => {
+    setCityShow(false)
+  }
+
   const onScrollToEnd = () => {
-    console.log(1)
     const _list = [...list, ...Array(20)]
     setList(_list)
     setLoadMore(_list.length > 120)
-  }
-
-  const onChangeCityPicker = () => {
-    setCityShow(false)
   }
 
   return (
@@ -55,12 +54,12 @@ function App() {
         <ActionSheet menus={['男', '女']} title="请选择性别">
           请选择
       </ActionSheet>
-        <div onClick={() => Toast('hello')}>toast</div>
-        <div onClick={() => Toast.success('hello')}>toast-success</div>
         <div>
-          <Avatar icon="https://avatar-static.segmentfault.com/388/030/3880304376-54cef34ceff86_big64" vip></Avatar>
+          <Avatar icon="https://avatar-static.segmentfault.com/388/030/3880304376-54cef34ceff86_big64" vip />
         </div>
         <div onClick={() => setShow(true)}>说明？</div>
+        <div onClick={() => Toast('hello')}>toast</div>
+        <div onClick={() => Toast.success('hello')}>toast-success</div>
         <div onClick={onClickEmpty}>ListEmpty</div>
         <div>
           <Picker
@@ -81,21 +80,22 @@ function App() {
       <Download />
       <Loading show={empty} />
       <Dialog
-        title="提示"
         show={show}
-        buttons={[
-          {
-            label: '取消',
-            onClick: () => setShow(false)
-          },
-          {
-            label: '确定',
-            onClick: () => setShow(false)
-          }
-        ]}
+        title="提示"
+        buttons={[{
+          label: '知道了',
+          onClick: () => setShow(false)
+        }]}
       >
-        GitHub上。你可以fork 这个仓库进行修改或测
+        erereer
       </Dialog>
+      <CityPicker
+        data={cnCity}
+        selected={[]}
+        onCancel={() => setCityShow(false)}
+        onChange={onChangeCityPicker}
+        show={cityShow}
+      />
       <Scroll
         data={list}
         loadMore={loadMore}
@@ -107,12 +107,6 @@ function App() {
           ))
         }
       </Scroll>
-      <CityPicker
-        data={cnCity}
-        onCancel={e => setCityShow(false)}
-        onChange={onChangeCityPicker}
-        show={cityShow}
-      />
     </div>
   );
 }

@@ -7,26 +7,27 @@ import './style.scss'
 
 class ActionSheet extends Component {
     static propTypes = {
-        menus: PropTypes.array,
+        className: PropTypes.string,
         title: PropTypes.string,
+        menus: PropTypes.array,
         cancelText: PropTypes.string,
+        disabled: PropTypes.bool,
         onCancel: PropTypes.func,
-        disabled: PropTypes.bool
+        onChange: PropTypes.func
     }
 
     static defaultProps = {
+        className: '',
         title: '',
         menus: [],
         cancelText: '取消',
+        disabled: false,
         onCancel: () => { },
-        disabled: false
+        onChange: () => { }
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: false
-        }
+    state = {
+        show: false
     }
 
     preventDefault(evt) {

@@ -110,15 +110,12 @@ class PickerGroup extends Component {
         if (!this.state.touching || this.props.items.length <= 1) return;
         if (e.targetTouches[0].identifier !== this.state.touchId) return;
 
-        //prevent move background
-        e.preventDefault();
-
         const pageY = e.targetTouches[0].pageY;
         const diffY = pageY - this.state.ogY;
 
         this.setState({
             translate: diffY
-        });
+        })
     }
 
     handleTouchEnd = (e) => {

@@ -19,6 +19,21 @@ import './style.scss'
  * />
  */
 class Skeleton extends React.Component {
+
+    static propTypes = {
+        active: PropTypes.bool,
+        avatar: PropTypes.bool,
+        loading: PropTypes.bool,
+        rows: PropTypes.number
+    }
+
+    static defaultProps = {
+        active: false,
+        avatar: false,
+        loading: false,
+        rows: 2
+    }
+
     render() {
         const { rows, avatar, active, loading, children } = this.props
         return (
@@ -45,17 +60,4 @@ class Skeleton extends React.Component {
     }
 }
 
-Skeleton.propTypes = {
-    active: PropTypes.bool,
-    avatar: PropTypes.bool,
-    loading: PropTypes.bool,
-    rows: PropTypes.number
-}
-
-Skeleton.defaultProps = {
-    active: false,
-    avatar: false,
-    loading: false,
-    rows: 2
-}
 export default Skeleton;

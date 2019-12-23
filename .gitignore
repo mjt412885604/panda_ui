@@ -8,7 +8,9 @@
 /coverage
 
 # production
-/build
+lib
+es
+dist
 
 # misc
 .DS_Store

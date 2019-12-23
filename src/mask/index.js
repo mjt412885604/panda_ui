@@ -5,11 +5,15 @@ import './style.scss'
 
 class Mask extends React.Component {
     static propTypes = {
-        transparent: PropTypes.bool
+        className: PropTypes.string,
+        transparent: PropTypes.bool,
+        onClick: PropTypes.func
     }
 
     static defaultProps = {
-        transparent: false
+        className: '',
+        transparent: false,
+        onClick: () => { }
     }
 
     preventDefault(evt) {
@@ -21,14 +25,14 @@ class Mask extends React.Component {
     }
 
     render() {
-        const { transparent, className, ...others } = this.props;
+        const { transparent, className, onClick, ...others } = this.props;
         const clz = classNames({
             'pandaui-mask': !transparent,
             'pandaui-mask_transparent': transparent
         }, className)
 
         return (
-            <div ref={this.preventDefault} className={clz} {...others}></div>
+            <div ref={this.preventDefault} onClick={onClick} className={clz} {...others}></div>
         )
     }
 }

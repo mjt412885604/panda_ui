@@ -13,6 +13,7 @@ import json from 'rollup-plugin-json'
 import nested from 'postcss-nested'
 import cssnext from 'postcss-cssnext'
 import postcssUrl from 'postcss-url'
+import copy from 'rollup-plugin-copy'
 import cssnano from 'cssnano'
 
 const env = process.env.NODE_ENV
@@ -67,6 +68,12 @@ export default {
         }),
         replace({
             "process.env.NODE_ENV": JSON.stringify(env)
+        }),
+        copy({
+            targets: [
+                { src: 'src/index.d.ts', dest: 'lib' },
+                { src: 'src/index.d.ts', dest: 'es' },
+            ]
         }),
         env === "production" && terser({
             parse: {

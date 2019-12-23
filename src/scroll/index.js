@@ -4,12 +4,24 @@ import classnames from 'classnames'
 import './style.scss'
 
 class Scroll extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-        }
-        this.isScroll = false
+
+    static propTypes = {
+        loadMore: PropTypes.bool,
+        loadText: PropTypes.string,
+        distance: PropTypes.number,
+        data: PropTypes.array,
+        throttle: PropTypes.number
     }
+
+    static defaultProps = {
+        loadMore: false,
+        loadText: '已经加载全部数据',
+        distance: 100,
+        data: [],
+        throttle: 150
+    }
+
+    isScroll = false
 
     /**
      * 滚动截流
@@ -65,22 +77,6 @@ class Scroll extends React.Component {
             </div>
         )
     }
-}
-
-Scroll.propTypes = {
-    loadMore: PropTypes.bool,
-    loadText: PropTypes.string,
-    distance: PropTypes.number,
-    data: PropTypes.array,
-    throttle: PropTypes.number
-}
-
-Scroll.defaultProps = {
-    loadMore: false,
-    loadText: '已经加载全部数据',
-    distance: 100,
-    data: [],
-    throttle: 150
 }
 
 export default Scroll;

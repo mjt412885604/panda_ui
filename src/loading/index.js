@@ -5,6 +5,21 @@ import loadingSvg from './loading.svg'
 import './style.scss'
 
 class Loading extends Component {
+
+    static propTypes = {
+        className: PropTypes.string,
+        message: PropTypes.string,
+        show: PropTypes.bool,
+        shadow: PropTypes.bool
+    }
+
+    static defaultProps = {
+        className: '',
+        message: '',
+        show: false,
+        shadow: false
+    }
+
     preventDefault(evt) {
         if (evt) {
             evt.addEventListener('touchmove', function (e) {
@@ -26,18 +41,6 @@ class Loading extends Component {
             </div>
         )
     }
-}
-
-Loading.propTypes = {
-    message: PropTypes.string,
-    show: PropTypes.bool,
-    shadow: PropTypes.bool
-}
-
-Loading.defaultProps = {
-    message: '',
-    show: false,
-    shadow: false
 }
 
 export default Loading;

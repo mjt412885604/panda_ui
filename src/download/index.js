@@ -5,6 +5,21 @@ import logo from './logo.png'
 import './style.scss'
 
 class Download extends Component {
+    static propTypes = {
+        className: PropTypes.string,
+        action: PropTypes.string,
+        text: PropTypes.string,
+        logo: PropTypes.string,
+        url: PropTypes.string
+    }
+
+    static defaultProps = {
+        action: '打开',
+        text: '熊猫儿科',
+        logo: logo,
+        url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.pandadoctor.pedi'
+    }
+
     render() {
         const { action, className, text, logo, url, ...reset } = this.props
         const cls = classNames('pandaui-download', className)
@@ -20,19 +35,6 @@ class Download extends Component {
             </div>
         )
     }
-}
-
-Download.propTypes = {
-    action: PropTypes.string,
-    logo: PropTypes.string,
-    url: PropTypes.string
-}
-
-Download.defaultProps = {
-    action: '打开',
-    text: '熊猫儿科',
-    logo: logo,
-    url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.pandadoctor.pedi'
 }
 
 export default Download
