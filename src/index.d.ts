@@ -56,7 +56,7 @@ declare class Button extends React.Component<ButtonProps>{
 
 export interface DialogButtons {
     label: string;
-    onClick: (node: HTMLSpanElement) => void;
+    onClick: (node: HTMLElement) => void;
     [index: string]: any;
 }
 
@@ -70,18 +70,9 @@ export interface DialogProps {
     children: any;
 }
 
-declare class Dialog extends React.Component<DialogProps> {
-    scrollTop: any;
-    componentWillReceiveProps(nextProps: DialogProps): void;
-    componentWillUnmount(): void;
-    destoryDialog: () => void;
-    preventDefault: (node: HTMLElement) => void;
-    contentTouchMove: (node: HTMLDivElement) => void;
-    renderButtons: () => JSX.Element;
-    render(): JSX.Element;
-}
+declare const Dialog: React.FC<DialogProps>;
 
-export interface DownLoadProps {
+export interface DownloadProps {
     className?: string;
     action?: string;
     text?: string;
@@ -89,7 +80,7 @@ export interface DownLoadProps {
     url?: string;
 }
 
-declare class DownLoad extends React.Component<DownLoadProps> {
+declare class Download extends React.Component<DownloadProps> {
     render(): JSX.Element;
 }
 
@@ -156,31 +147,34 @@ declare class Picker extends React.Component<PickerProps, PickerState> {
     render(): JSX.Element;
 }
 
+interface CityPickerData {
+    label: string;
+    value: string;
+    children?: any[];
+}
+
 export interface CityPickerProps {
-    data: any[];
+    data: CityPickerData[];
+    value?: any[];
+    title?: string;
+    cancelText?: string;
+    confirmText?: string;
     dataMap?: {
         id?: string;
         items?: string;
     };
-    selected: any[];
-    show: boolean;
-    lang?: {
-        leftBtn?: string;
-        rightBtn?: string;
-    };
-    onChange: (select: any) => void;
+    onChange?: (select: CityPickerData[]) => void;
     onCancel?: () => void;
 }
 
 export interface CityPickerState {
-    groups: any[];
-    selected: any;
-    picker_show: boolean;
-    text: string;
+    groups: any;
+    selected: number[];
+    text: any[];
 }
 
 declare class CityPicker extends React.Component<CityPickerProps, CityPickerState> {
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[]): void;
+    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num:number): void;
     updateDataBySelected(selected: any, idex: any): void;
     updateGroup(...rest: any[]): void;
     handleChange(selected: any): void;
@@ -207,9 +201,9 @@ declare class Scroll extends React.Component<ScrollProps> {
 }
 
 export interface SkeletonProps {
-    active?: boolea;
-    avatar?: boolea;
-    loading: boolea;
+    active?: boolean;
+    avatar?: boolean;
+    loading: boolean;
     rows?: number;
     children?: any;
 }

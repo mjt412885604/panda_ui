@@ -1,120 +1,88 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Picker from './picker'
+import { isObject, isArray } from '../utils/utils'
 
-/**
- *  An city pick component build on top of picker
- *
- */
 class CityPicker extends React.Component {
 
     static propTypes = {
-        /**
-         * Array of item trees, consists property for label and subitems
-         *
-         */
         data: PropTypes.array.isRequired,
-        /**
-         * keys for data provide, `id` to indicate property name for label, `items` to indicate property name for subitems
-         *
-         */
         dataMap: PropTypes.object,
-        /**
-         * currently selected item
-         *
-         */
-        selected: PropTypes.array,
-        /**
-         * display the component
-         *
-         */
-        show: PropTypes.bool,
-        /**
-         * language object consists of `leftBtn` and `rightBtn`
-         *
-         */
-        lang: PropTypes.object,
+        value: PropTypes.array,
+        cancelText: PropTypes.string,
+        confirmText: PropTypes.string,
+        title: PropTypes.string
     }
 
     static defaultProps = {
         data: [],
         dataMap: { id: 'label', items: 'children' },
-        selected: [],
-        show: false,
-        lang: { leftBtn: '取消', rightBtn: '确定' }
+        value: [],
+        title: '',
+        cancelText: '取消',
+        confirmText: '确定',
     }
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        const { data, selected, dataMap } = this.props;
-        const { groups, newselected } = this.parseData(data, dataMap.items, selected);
+        const { data, value, dataMap } = this.props;
+        const { groups, newselected } = this.parseData(data, dataMap.items, value);
         this.state = {
             groups,
             selected: newselected,
-            picker_show: false,
-            text: ''
-        };
-        //console.log(this.state.groups)
-        this.updateGroup = this.updateGroup.bind(this);
-        this.parseData = this.parseData.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+            text: []
+        }
     }
 
-    //@return array of group with options
-    parseData(data, subKey, selected = [], group = [], newselected = []){
-      let _selected = 0;
+    parseData = (data, subKey, selected = [], group = [], newselected = [], num = 0) => {
+        let _selected = 0;
 
-      if ( Array.isArray(selected) && selected.length > 0){
-        let _selectedClone = selected.slice(0);
-        _selected = _selectedClone.shift();
-        selected = _selectedClone;
-      }
+        if (isArray(selected) && selected.length > 0) {
+            if (isObject(selected[num])) {
+                const index = data.findIndex(v => v.label == selected[num].label)
+                _selected = index == -1 ? 0 : index
+            } else {
+                _selected = selected[num]
+            }
+        }
 
-      if (typeof data[_selected] === 'undefined'){
-          _selected = 0;
-      }
+        newselected.push(_selected)
+        const item = data[_selected]
 
-      newselected.push(_selected);
+        var _group = JSON.parse(JSON.stringify(data))
+        _group.forEach(g => delete g[subKey])
+        group.push({ items: _group, mapKeys: { 'label': this.props.dataMap.id } })
 
-      let item = data[_selected];
-
-      var _group = JSON.parse(JSON.stringify(data));
-      _group.forEach(g=>delete g[subKey]);
-      group.push({ items: _group, mapKeys: { 'label': this.props.dataMap.id } });
-
-      if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])){
-        return this.parseData(item[subKey], subKey, selected, group, newselected);
-      } else {
-        return { groups: group, newselected };
-      }
+        if (isArray(item[subKey])) {
+            num++
+            return this.parseData(item[subKey], subKey, selected, group, newselected, num);
+        } else {
+            return { groups: group, newselected }
+        }
     }
 
-    updateDataBySelected(selected, cb){
-        const { data, dataMap } = this.props;
-        //validate if item exists
+    updateDataBySelected = (selected, cb) => {
+        const { data, dataMap } = this.props
+        const { groups, newselected } = this.parseData(data, dataMap.items, selected)
 
-        const { groups, newselected } = this.parseData(data, dataMap.items, selected);
-
-        let text = '';
+        let text = []
         try {
-            groups.forEach( (group, _i) => {
-                text += `${group['items'][selected[_i]][this.props.dataMap.id]} `;
+            groups.forEach((group, _i) => {
+                text.push(group['items'][selected[_i]])
             });
-        } catch (err){
-            //wait
-            text = this.state.text;
+        } catch (err) {
+            text = []
         }
 
         this.setState({
             groups,
             text,
             selected: newselected
-        }, ()=>cb());
+        }, () => cb());
     }
 
-
-    updateGroup(item, i, groupIndex, selected, picker){
-        this.updateDataBySelected(selected, ()=>{
+    updateGroup = (item, i, groupIndex, selected, picker) => {
+        this.updateDataBySelected(selected, () => {
             //update picker
             picker.setState({
                 selected: this.state.selected
@@ -122,29 +90,29 @@ class CityPicker extends React.Component {
         });
     }
 
-    handleChange(selected){
-        //handle unchange
-        if (selected === this.state.selected){
-            this.updateDataBySelected(selected, ()=>{
-                if (this.props.onChange) this.props.onChange(this.state.text);
-            });
+    handleChange = (selected) => {
+        if (selected === this.state.selected) {
+            this.updateDataBySelected(selected, () => {
+                this.props.onChange && this.props.onChange(this.state.text)
+            })
+        } else {
+            this.props.onChange && this.props.onChange(this.state.text)
         }
-
-        if (this.props.onChange) this.props.onChange(this.state.text);
     }
 
-    render(){
+    render() {
         return (
             <Picker
-                show={this.props.show}
+                title={this.props.title}
+                cancelText={this.props.cancelText}
+                confirmText={this.props.confirmText}
+                groups={this.state.groups}
+                defaultSelect={this.state.selected}
                 onGroupChange={this.updateGroup}
                 onChange={this.handleChange}
-                defaultSelect={this.state.selected}
-                groups={this.state.groups}
                 onCancel={this.props.onCancel}
-                lang={this.props.lang}
-            />
-        );
+            >{this.props.children}</Picker>
+        )
     }
 }
 

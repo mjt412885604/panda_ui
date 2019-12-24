@@ -39,7 +39,7 @@ class PickerGroup extends Component {
             totalHeight: 0,
             selected: 0,
             animating: this.props.animation
-        };
+        }
     }
 
     componentDidMount() {
@@ -89,7 +89,7 @@ class PickerGroup extends Component {
                 (this.state.translate + (itemHeight * i) + itemHeight) <= indicatorTop + indicatorHeight) {
                 selected = i;
             }
-        });
+        })
 
         if (onChange && propagate) onChange(items[selected], selected, groupIndex);
     }
@@ -103,7 +103,7 @@ class PickerGroup extends Component {
             touchId: e.targetTouches[0].identifier,
             ogY: this.state.translate === 0 ? e.targetTouches[0].pageY : e.targetTouches[0].pageY - this.state.translate,
             animating: false
-        });
+        })
     }
 
     handleTouchMove = (e) => {
@@ -154,7 +154,7 @@ class PickerGroup extends Component {
             ogTranslate: 0,
             animating: true,
             translate
-        }, () => this.updateSelected());
+        }, () => this.updateSelected())
     }
 
     preventDefault(evt) {

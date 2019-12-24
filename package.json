@@ -1,18 +1,21 @@
 {
   "name": "pandaui-mobile",
-  "version": "0.0.2",
-  "main": "lib/index.js",
+  "version": "0.0.3",
+  "main": "es/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
     "prepublishOnly": "npm run release",
-    "release": "npm run build:prod",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
-    "build:dev": "cross-env NODE_ENV=development rollup -c"
+    "build:dev": "cross-env NODE_ENV=development rollup -c",
+    "build:es": "babel src --out-dir es && gulp",
+    "build": "npm run build:prod && npm run build:es",
+    "release": "npm run build"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -21,6 +24,10 @@
     "babel-preset-flow": "^6.23.0",
     "cross-env": "^6.0.3",
     "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
     "node-sass": "^4.13.0",
     "postcss-cssnext": "^3.1.0",
     "postcss-import": "^12.0.1",

@@ -24,9 +24,6 @@ export default {
         dir: 'lib',
         format: 'cjs',
         sourcemap: false
-    }, {
-        dir: 'es',
-        format: 'es'
     }],
     external: [
         'react',
@@ -71,8 +68,7 @@ export default {
         }),
         copy({
             targets: [
-                { src: 'src/index.d.ts', dest: 'lib' },
-                { src: 'src/index.d.ts', dest: 'es' },
+                { src: 'src/index.d.ts', dest: 'lib' }
             ]
         }),
         env === "production" && terser({
@@ -84,6 +80,7 @@ export default {
                 warnings: false,
                 comparisons: false,
                 inline: 2,
+                drop_console: true
             },
             mangle: {
                 safari10: true,

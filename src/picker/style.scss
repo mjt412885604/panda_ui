@@ -18,11 +18,11 @@
 
 .pandaui-picker__hd {
     display: flex;
-    padding: 9px 15px;
+    padding: 9PX 15PX;
     background-color: #fff;
     position: relative;
     text-align: center;
-    font-size: 17px;
+    font-size: 17PX;
 }
 
 .pandaui-picker__hd:after {
@@ -31,8 +31,8 @@
     left: 0;
     bottom: 0;
     right: 0;
-    height: 1px;
-    border-bottom: 1px solid #E5E5E5;
+    height: 1PX;
+    border-bottom: 1PX solid #E5E5E5;
     color: #E5E5E5;
     transform-origin: 0 100%;
     transform: scaleY(0.5);
@@ -57,7 +57,7 @@
     display: flex;
     position: relative;
     background-color: #fff;
-    height: 238px;
+    height: 238PX;
     overflow: hidden;
 }
 
@@ -78,17 +78,17 @@
     background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6)), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6)), linear-gradient(0deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
     background-position: top, bottom;
-    background-size: 100% 102px;
+    background-size: 100% 102PX;
     background-repeat: no-repeat;
     transform: translateZ(0);
 }
 
 .pandaui-picker__indicator {
     width: 100%;
-    height: 34px;
+    height: 34PX;
     position: absolute;
     left: 0;
-    top: 102px;
+    top: 102PX;
     z-index: 3;
 }
 
@@ -98,8 +98,8 @@
     left: 0;
     top: 0;
     right: 0;
-    height: 1px;
-    border-top: 1px solid #E5E5E5;
+    height: 1PX;
+    border-top: 1PX solid #E5E5E5;
     color: #E5E5E5;
     transform-origin: 0 0;
     transform: scaleY(0.5);
@@ -111,8 +111,8 @@
     left: 0;
     bottom: 0;
     right: 0;
-    height: 1px;
-    border-bottom: 1px solid #E5E5E5;
+    height: 1PX;
+    border-bottom: 1PX solid #E5E5E5;
     color: #E5E5E5;
     transform-origin: 0 100%;
     transform: scaleY(0.5);
@@ -127,8 +127,8 @@
 
 .pandaui-picker__item {
     padding: 0;
-    height: 34px;
-    line-height: 34px;
+    height: 34PX;
+    line-height: 34PX;
     text-align: center;
     color: #000;
     text-overflow: ellipsis;
