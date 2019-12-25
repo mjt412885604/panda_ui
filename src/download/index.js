@@ -24,15 +24,18 @@ class Download extends Component {
         const { action, className, text, logo, url, ...reset } = this.props
         const cls = classNames('pandaui-download', className)
         return (
-            <div className={cls} {...reset}>
-                <div className="icon">
-                    <img src={logo} alt="熊猫儿科" />
-                    {text}
+            <>
+                <div className="pandaui-download-height"></div>
+                <div className={cls} {...reset}>
+                    <div className="icon">
+                        <img src={logo} alt="熊猫儿科" />
+                        {text}
+                    </div>
+                    <div className="btn">
+                        <a href={url}>{action}</a>
+                    </div>
                 </div>
-                <div className="btn">
-                    <a href={url}>{action}</a>
-                </div>
-            </div>
+            </>
         )
     }
 }

@@ -8,6 +8,9 @@
     width: 100%;
     background-color: #EFEFF4;
     transition: transform .3s;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    overflow: hidden;
 }
 
 .pandaui-actionsheet__title {
@@ -61,9 +64,9 @@
 
 .pandaui-actionsheet__cell {
     position: relative;
-    padding: 10px 0;
+    padding: 16px;
     text-align: center;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 .pandaui-actionsheet__cell:before {

@@ -9,8 +9,8 @@ class CityPicker extends React.Component {
         data: PropTypes.array.isRequired,
         dataMap: PropTypes.object,
         value: PropTypes.array,
-        cancelText: PropTypes.string,
-        confirmText: PropTypes.string,
+        canceltext: PropTypes.string,
+        confirmtext: PropTypes.string,
         title: PropTypes.string
     }
 
@@ -19,8 +19,8 @@ class CityPicker extends React.Component {
         dataMap: { id: 'label', items: 'children' },
         value: [],
         title: '',
-        cancelText: '取消',
-        confirmText: '确定',
+        canceltext: '取消',
+        confirmtext: '确定',
     }
 
     constructor(props) {
@@ -104,8 +104,8 @@ class CityPicker extends React.Component {
         return (
             <Picker
                 title={this.props.title}
-                cancelText={this.props.cancelText}
-                confirmText={this.props.confirmText}
+                canceltext={this.props.canceltext}
+                confirmtext={this.props.confirmtext}
                 groups={this.state.groups}
                 defaultSelect={this.state.selected}
                 onGroupChange={this.updateGroup}

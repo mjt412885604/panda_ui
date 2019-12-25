@@ -66,7 +66,7 @@ class Toast extends Component {
                     onExited={() => willUnmount()}
                 >
                     <div className={cls} {...others}>
-                        {type ? <div className="icons"><i className="iconfont-pandaui icon-success"></i></div> : ''}
+                        {type ? <div className="icons"><i className="icon-success"></i></div> : ''}
                         {message}
                     </div>
                 </CSSTransition>

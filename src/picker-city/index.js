@@ -1,5 +1,3 @@
-import CityPicker from './city_picker'
+import PickerCity from './city_picker'
 
-export {
-    CityPicker
-}
+export default PickerCity;

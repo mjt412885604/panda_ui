@@ -7,11 +7,10 @@ import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
 import Picker from './picker'
-import { PickerCity } from './picker-city'
+import PickerCity from './picker-city'
 import Scroll from './scroll'
 import Skeleton from './skeleton'
 import Toast from './toast'
-import './style/iconfont.scss'
 
 export {
     ActionSheet,

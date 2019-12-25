@@ -30,7 +30,6 @@ const appToast = (props = {}, time) => {
         callback: null
     }, props)
 
-
     const components = React.createElement(Toast, Object.assign({}, props, {
         willUnmount: () => {
             appToast.hide(props.callback)

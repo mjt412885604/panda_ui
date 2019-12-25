@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import PickerGroup from './picker_group'
 import classNames from 'classnames'
 import Mask from '../mask'
+import '../picker/style.scss'
 
 class Picker extends Component {
     static propTypes = {
@@ -11,16 +12,16 @@ class Picker extends Component {
         onGroupChange: PropTypes.func,
         onChange: PropTypes.func,
         onCancel: PropTypes.func,
-        cancelText: PropTypes.string,
-        confirmText: PropTypes.string,
+        canceltext: PropTypes.string,
+        confirmtext: PropTypes.string,
         title: PropTypes.string
     }
 
     static defaultProps = {
         groups: [],
         title: '',
-        cancelText: '取消',
-        confirmText: '确定',
+        canceltext: '取消',
+        confirmtext: '确定',
     }
 
     constructor(props) {
@@ -77,15 +78,15 @@ class Picker extends Component {
     }
 
     renderActions = () => {
-        const { cancelText, confirmText, title } = this.props
+        const { canceltext, confirmtext, title } = this.props
 
         return (
             <div className="pandaui-picker__hd">
-                <span className="pandaui-picker__action" onClick={this.handleClose}>{cancelText}</span>
+                <span className="pandaui-picker__action" onClick={this.handleClose}>{canceltext}</span>
                 {
                     title ? <span style={{ flex: 1, color: '#000' }}>{title}</span> : null
                 }
-                <span className="pandaui-picker__action" onClick={this.handleChanges}>{confirmText}</span>
+                <span className="pandaui-picker__action" onClick={this.handleChanges}>{confirmtext}</span>
             </div>
         )
     }

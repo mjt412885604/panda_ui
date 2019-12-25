@@ -1,10 +1,15 @@
 @import '../style/colors';
 
+.pandaui-button-height {
+    height: 58px;
+}
+
 .pandaui-button {
     width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     height: 48px;
-    line-height: 48px;
-    text-align: center;
     font-size: 16px;
     color: #fff;
     background: $themeColor;
@@ -30,7 +35,6 @@
             width: 100%;
             height: 100%;
             background-color: rgba(255, 255, 255, .3);
-
         }
 
         color: rgba(255, 255, 255, 0.8);
@@ -48,6 +52,13 @@
         display: inline-flex;
         margin-right: 10px;
         animation: pandaui-mobile-button-loading 1s infinite both linear;
+
+        .icon-loading {
+            display: inline-flex;
+            height: 16px;
+            width: 16px;
+            background: url(./loading.svg) center center/cover no-repeat;
+        }
     }
 }
 

@@ -21,7 +21,7 @@ const env = process.env.NODE_ENV
 export default {
     input: 'src/index.js',
     output: [{
-        dir: 'lib',
+        dir: 'dist',
         format: 'cjs',
         sourcemap: false
     }],
@@ -34,7 +34,7 @@ export default {
     experimentalCodeSplitting: true,
     plugins: [
         clear({
-            targets: ['es', 'lib'],
+            targets: ['dist', 'lib', 'es'],
         }),
         postcss({
             extensions: [".scss", ".less", ".css"],
@@ -68,6 +68,7 @@ export default {
         }),
         copy({
             targets: [
+                { src: 'src/index.d.ts', dest: 'dist' },
                 { src: 'src/index.d.ts', dest: 'lib' }
             ]
         }),

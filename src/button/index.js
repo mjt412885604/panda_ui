@@ -36,14 +36,14 @@ export default class Button extends React.Component {
 
         return (
             <>
-                {fixed && height ? <div style={{ height: 58 }}></div> : ''}
+                {fixed && height ? <div className="pandaui-button-height"></div> : ''}
                 <button
                     className={cls}
                     disabled={disabled || loading}
                     onClick={onClick}
                     {...rest}
                 >
-                    {loading ? <span className="loading-box"><i className="iconfont-pandaui icon-loading"></i></span> : ''}
+                    {loading ? <span className="loading-box"><i className="icon-loading"></i></span> : ''}
                     {children}
                 </button>
             </>

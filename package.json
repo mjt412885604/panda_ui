@@ -1,15 +1,15 @@
 {
   "name": "pandaui-mobile",
-  "version": "0.0.3",
-  "main": "es/index.js",
+  "version": "0.0.9",
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "npm run release",
+    "release": "npm run build",
     "build:prod": "cross-env NODE_ENV=production rollup -c",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
-    "build:es": "babel src --out-dir es && gulp",
-    "build": "npm run build:prod && npm run build:es",
-    "release": "npm run build"
+    "build:es": "babel src --out-dir lib && gulp",
+    "build": "npm run build:prod && npm run build:es"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.7",

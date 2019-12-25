@@ -7,7 +7,7 @@ export interface ActionSheetProps {
         label: string;
         value?: string | number;
     } | string | number>;
-    cancelText?: string;
+    canceltext?: string;
     disabled?: boolean;
     onCancel?: () => void;
     onChange?: (index: any) => void;
@@ -147,34 +147,34 @@ declare class Picker extends React.Component<PickerProps, PickerState> {
     render(): JSX.Element;
 }
 
-interface CityPickerData {
+interface PickerCityData {
     label: string;
     value: string;
     children?: any[];
 }
 
-export interface CityPickerProps {
-    data: CityPickerData[];
+export interface PickerCityProps {
+    data: PickerCityData[];
     value?: any[];
     title?: string;
-    cancelText?: string;
-    confirmText?: string;
+    canceltext?: string;
+    confirmtext?: string;
     dataMap?: {
         id?: string;
         items?: string;
     };
-    onChange?: (select: CityPickerData[]) => void;
+    onChange?: (select: PickerCityData[]) => void;
     onCancel?: () => void;
 }
 
-export interface CityPickerState {
+export interface PickerCityState {
     groups: any;
     selected: number[];
     text: any[];
 }
 
-declare class CityPicker extends React.Component<CityPickerProps, CityPickerState> {
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num:number): void;
+declare class PickerCity extends React.Component<PickerCityProps, PickerCityState> {
+    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
     updateDataBySelected(selected: any, idex: any): void;
     updateGroup(...rest: any[]): void;
     handleChange(selected: any): void;
@@ -212,7 +212,21 @@ declare class Skeleton extends React.Component<SkeletonProps> {
     render(): JSX.Element;
 }
 
-declare const Toast: any;
+interface ToastOptions {
+    time?: string;
+    message: string;
+    type?: null | string,
+    callback?: () => void;
+}
+
+type ToastType = string | number | ToastOptions
+
+interface ToastProps {
+    (options: ToastType, time?: number): void;
+    success(options: ToastType, time?: number): void;
+}
+
+declare const Toast: ToastProps;
 
 export {
     ActionSheet,
@@ -224,7 +238,7 @@ export {
     Loading,
     Mask,
     Picker,
-    CityPicker,
+    PickerCity,
     Scroll,
     Skeleton,
     Toast
