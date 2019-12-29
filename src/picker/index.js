@@ -3,7 +3,7 @@ import PickerGroup from './picker-group'
 import classNames from 'classnames'
 import { TOP, LINE_HEIGHT } from './constant'
 import * as dateHandle from './date'
-import './style.scss'
+import '../picker-city/style.scss'
 
 // todos:
 // 1. 加入滚动惯性
@@ -646,15 +646,15 @@ export default class Picker extends React.Component {
         <div style={shouldDivHidden} className={clsMask} onClick={onCancel} />
         <div style={shouldDivHidden} className={clsSlider}>
           <div className="pandaui-picker__hd">
-            <div className="pandaui-picker__action" onClick={onCancel}>
-              取消
-            </div>
-            {title && <div className="pandaui-picker__title">{title}</div>}
-            <div className="pandaui-picker__action" onClick={onChange}>
-              确定
-            </div>
+            <button className="pandaui-icon-btn pandaui-icon-btn_close pandaui-picker__close" onClick={onCancel}></button>
+            {
+              title ? <span className="pandaui-picker__title">{title}</span> : null
+            }
           </div>
           <div className="pandaui-picker__bd">{pickerGroup}</div>
+          <div className="pandaui-picker__ft">
+            <span onClick={onChange} className="btn">确定</span>
+          </div>
           <input type="hidden" name={name} value={this.state.pickerValue} />
         </div>
       </div>

@@ -46,6 +46,10 @@ class CityPicker extends React.Component {
             }
         }
 
+        if (!data[_selected]) {
+            _selected = 0
+        }
+
         newselected.push(_selected)
         const item = data[_selected]
 
@@ -53,7 +57,7 @@ class CityPicker extends React.Component {
         _group.forEach(g => delete g[subKey])
         group.push({ items: _group, mapKeys: { 'label': this.props.dataMap.id } })
 
-        if (isArray(item[subKey])) {
+        if (item[subKey] && isArray(item[subKey])) {
             num++
             return this.parseData(item[subKey], subKey, selected, group, newselected, num);
         } else {

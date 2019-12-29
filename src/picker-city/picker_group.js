@@ -15,10 +15,10 @@ class PickerGroup extends Component {
     }
 
     static defaultProps = {
-        height: 238,
-        itemHeight: 25 + 9, //content + padding
-        indicatorTop: 102,
-        indicatorHeight: 34,
+        height: 240,
+        itemHeight: 39 + 9, //content + padding
+        indicatorTop: 96,
+        indicatorHeight: 48,
         aniamtion: true,
         groupIndex: -1,
         defaultIndex: -1,
@@ -54,7 +54,7 @@ class PickerGroup extends Component {
         const { items, itemHeight, indicatorTop, defaultIndex } = props;
         const totalHeight = items.length * itemHeight;
         let translate = totalHeight <= indicatorTop ? indicatorTop : 0;
-
+        
         if (defaultIndex > -1) {
             if (translate === 0) {
                 let upperCount = Math.floor(indicatorTop / itemHeight);
