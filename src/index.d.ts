@@ -121,29 +121,24 @@ declare class Mask extends React.Component<MaskProps> {
     render(): JSX.Element;
 }
 
+interface PickerDataItems {
+    label: string;
+    value?: string | number;
+}
+interface PickerData {
+    items: PickerDataItems[]
+}
+
 export interface PickerProps {
-    className?: string;
-    mode: 'selector' | 'multiSelector' | 'time' | 'date';
+    value?: any[];
+    data: PickerData[],
+    confirmText?: string;
     title?: string;
-    start?: string
-    end?: string;
-    value?: any[] | string | number;
-    disabled?: boolean;
-    range?: any;
-    onChange?: (...rest: any[]) => void;
+    onChange?: (data: number[]) => void;
+    onCancel?: () => void;
 }
 
-export interface PickerState {
-    pickerValue: any;
-    hidden: boolean;
-    fadeOut: boolean;
-    height: any[];
-}
-
-declare class Picker extends React.Component<PickerProps, PickerState> {
-    handlePrpos(props: PickerProps): void;
-    componentWillReceiveProps(nextProps: PickerProps): void;
-    componentWillUnmount(): void;
+declare class Picker extends React.Component<PickerProps, any>{
     render(): JSX.Element;
 }
 
@@ -157,8 +152,7 @@ export interface PickerCityProps {
     data: PickerCityData[];
     value?: any[];
     title?: string;
-    canceltext?: string;
-    confirmtext?: string;
+    confirmText?: string;
     dataMap?: {
         id?: string;
         items?: string;
@@ -174,6 +168,30 @@ export interface PickerCityState {
 }
 
 declare class PickerCity extends React.Component<PickerCityProps, PickerCityState> {
+    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
+    updateDataBySelected(selected: any, idex: any): void;
+    updateGroup(...rest: any[]): void;
+    handleChange(selected: any): void;
+    render(): JSX.Element;
+}
+
+export interface PickerDateProps {
+    value: string;
+    confirmText?: string;
+    title?: string;
+    start?: string;
+    end?: string;
+    onChange?: (data: any[]) => void;
+    onCancel?: () => void;
+}
+
+export interface PickerDateState {
+    groups: any;
+    selected: number[];
+    text: any[];
+}
+
+declare class PickerDate extends React.Component<PickerDateProps, PickerDateState>{
     parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
     updateDataBySelected(selected: any, idex: any): void;
     updateGroup(...rest: any[]): void;
@@ -239,6 +257,7 @@ export {
     Mask,
     Picker,
     PickerCity,
+    PickerDate,
     Scroll,
     Skeleton,
     Toast

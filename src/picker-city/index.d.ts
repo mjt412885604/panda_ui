@@ -10,8 +10,7 @@ export interface PickerCityProps {
     data: PickerCityData[];
     value?: any[];
     title?: string;
-    canceltext?: string;
-    confirmtext?: string;
+    confirmText?: string;
     dataMap?: {
         id?: string;
         items?: string;
@@ -34,4 +33,4 @@ declare class PickerCity extends React.Component<PickerCityProps, PickerCityStat
     render(): JSX.Element;
 }
 
-export default CityPicker;
+export default PickerCity;

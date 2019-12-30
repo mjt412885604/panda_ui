@@ -1,32 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Picker from './picker'
-import { isObject, isArray } from '../utils/utils'
+import Picker from '../picker'
+import { isArray } from '../utils/utils'
+import { dateFormat, initPickerData } from './utils'
 
-class CityPicker extends React.Component {
+class PickerDate extends React.Component {
 
     static propTypes = {
-        data: PropTypes.array.isRequired,
         dataMap: PropTypes.object,
-        value: PropTypes.array,
-        canceltext: PropTypes.string,
-        confirmtext: PropTypes.string,
-        title: PropTypes.string
+        value: PropTypes.string,
+        confirmText: PropTypes.string,
+        title: PropTypes.string,
+        start: PropTypes.string,
+        end: PropTypes.string,
+        onChange: PropTypes.func,
+        onCancel: PropTypes.func
     }
 
     static defaultProps = {
-        data: [],
         dataMap: { id: 'label', items: 'children' },
-        value: [],
+        value: '',
         title: '',
-        canceltext: '取消',
-        confirmtext: '确定',
+        confirmText: '确定',
+        start: dateFormat(new Date().setFullYear(dateFormat()[0] - 1)).join('-'),
+        end: dateFormat().join('-')
     }
 
     constructor(props) {
         super(props);
-        const { data, value, dataMap } = this.props;
-        const { groups, newselected } = this.parseData(data, dataMap.items, value);
+        const { start, end, value, dataMap } = this.props
+        const selected = typeof value == 'string' ? value.split('-') : []
+        this.data = initPickerData({ start, end })
+        const { groups, newselected } = this.parseData(this.data, dataMap.items, selected)
+
         this.state = {
             groups,
             selected: newselected,
@@ -34,12 +40,12 @@ class CityPicker extends React.Component {
         }
     }
 
-    parseData = (data, subKey, selected = [], group = [], newselected = [], num = 0) => {
+    parseData = (data, subKey, selected, group = [], newselected = [], num = 0) => {
         let _selected = 0;
 
         if (isArray(selected) && selected.length > 0) {
-            if (isObject(selected[num])) {
-                const index = data.findIndex(v => v.label == selected[num].label)
+            if (typeof selected[num] == 'string') {
+                const index = data.findIndex(v => v.value == selected[num])
                 _selected = index == -1 ? 0 : index
             } else {
                 _selected = selected[num]
@@ -66,13 +72,13 @@ class CityPicker extends React.Component {
     }
 
     updateDataBySelected = (selected, cb) => {
-        const { data, dataMap } = this.props
-        const { groups, newselected } = this.parseData(data, dataMap.items, selected)
+        const { dataMap } = this.props
+        const { groups, newselected } = this.parseData(this.data, dataMap.items, selected)
 
         let text = []
         try {
             groups.forEach((group, _i) => {
-                text.push(group['items'][selected[_i]])
+                text.push(group['items'][selected[_i]].value)
             });
         } catch (err) {
             text = []
@@ -87,7 +93,6 @@ class CityPicker extends React.Component {
 
     updateGroup = (item, i, groupIndex, selected, picker) => {
         this.updateDataBySelected(selected, () => {
-            //update picker
             picker.setState({
                 selected: this.state.selected
             });
@@ -109,9 +114,9 @@ class CityPicker extends React.Component {
             <Picker
                 title={this.props.title}
                 canceltext={this.props.canceltext}
-                confirmtext={this.props.confirmtext}
-                groups={this.state.groups}
-                defaultSelect={this.state.selected}
+                confirmText={this.props.confirmText}
+                data={this.state.groups}
+                value={this.state.selected}
                 onGroupChange={this.updateGroup}
                 onChange={this.handleChange}
                 onCancel={this.props.onCancel}
@@ -120,4 +125,4 @@ class CityPicker extends React.Component {
     }
 }
 
-export default CityPicker;
+export default PickerDate;

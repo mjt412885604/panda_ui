@@ -1,28 +1,23 @@
 import * as React from 'react'
 
+interface PickerDataItems {
+    label: string;
+    value?: string | number;
+}
+interface PickerData {
+    items: PickerDataItems[]
+}
+
 export interface PickerProps {
-    className?: string;
-    mode: 'selector' | 'multiSelector' | 'time' | 'date';
+    value?: any[];
+    data: PickerData[],
+    confirmText?: string;
     title?: string;
-    start?: string
-    end?: string;
-    value?: any[] | string | number;
-    disabled?: boolean;
-    range?: any;
-    onChange?: (...rest: any[]) => void;
+    onChange?: (data: number[]) => void;
+    onCancel?: () => void;
 }
 
-export interface PickerState {
-    pickerValue: any;
-    hidden: boolean;
-    fadeOut: boolean;
-    height: any[];
-}
-
-declare class Picker extends React.Component<PickerProps, PickerState> {
-    handlePrpos(props: PickerProps): void;
-    componentWillReceiveProps(nextProps: PickerProps): void;
-    componentWillUnmount(): void;
+declare class Picker extends React.Component<PickerProps, any>{
     render(): JSX.Element;
 }
 

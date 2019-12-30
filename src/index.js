@@ -8,6 +8,7 @@ import Loading from './loading'
 import Mask from './mask'
 import Picker from './picker'
 import PickerCity from './picker-city'
+import PickerDate from './picker-date'
 import Scroll from './scroll'
 import Skeleton from './skeleton'
 import Toast from './toast'
@@ -23,6 +24,7 @@ export {
     Mask,
     Picker,
     PickerCity,
+    PickerDate,
     Scroll,
     Skeleton,
     Toast,

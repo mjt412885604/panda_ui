@@ -54,7 +54,7 @@ class PickerGroup extends Component {
         const { items, itemHeight, indicatorTop, defaultIndex } = props;
         const totalHeight = items.length * itemHeight;
         let translate = totalHeight <= indicatorTop ? indicatorTop : 0;
-        
+
         if (defaultIndex > -1) {
             if (translate === 0) {
                 let upperCount = Math.floor(indicatorTop / itemHeight);
