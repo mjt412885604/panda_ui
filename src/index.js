@@ -6,6 +6,7 @@ import Download from './download'
 import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
+import Paragraph from './paragraph'
 import Picker from './picker'
 import PickerCity from './picker-city'
 import PickerDate from './picker-date'
@@ -22,6 +23,7 @@ export {
     ListEmpty,
     Loading,
     Mask,
+    Paragraph,
     Picker,
     PickerCity,
     PickerDate,
