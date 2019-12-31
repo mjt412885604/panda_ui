@@ -1,82 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-let ellipsisContainer = null
-
-const numberToPrecision = number => {
-    if (!isNaN(number) && typeof number == 'number') {
-        number = number < 0 ? 0 : number
-        return +number.toPrecision(10)
-    }
-    return 0
-}
-
-const styleToString = style => {
-    const styleNames = Array.prototype.slice.apply(style);
-    return styleNames.map(name => `${name}: ${style.getPropertyValue(name)};`).join('');
-}
-
-const pxToNumber = value => {
-    if (!value) return 0;
-    const match = value.match(/^\d*(\.\d*)?/);
-    return match ? Number(match[0]) : 0;
-}
-
-const measure = (
-    originEle,
-    rows,
-    content,
-    ellipsisStr = '...',
-    circelNo = 0
-) => {
-    if (!ellipsisContainer) {
-        ellipsisContainer = document.createElement('div')
-        ellipsisContainer.setAttribute('aria-hidden', 'true')
-        document.body.appendChild(ellipsisContainer)
-    }
-
-    const originStyle = (elm) => window.getComputedStyle(elm);
-    const originCSS = styleToString(originStyle(originEle))
-
-    ellipsisContainer.setAttribute('style', originCSS);
-    ellipsisContainer.style.position = 'fixed';
-    ellipsisContainer.style.left = '0';
-    ellipsisContainer.style.height = 'auto';
-    ellipsisContainer.style.minHeight = 'auto';
-    ellipsisContainer.style.maxHeight = 'auto';
-    ellipsisContainer.style.top = '-999999px';
-    ellipsisContainer.style.zIndex = '-1000';
-
-    // clean up css overflow
-    ellipsisContainer.style.textOverflow = 'clip';
-    ellipsisContainer.style.whiteSpace = 'normal';
-    ellipsisContainer.style.webkitLineClamp = 'none';
-
-    ellipsisContainer.innerText = content + ellipsisStr
-
-    const { lineHeight, paddingTop, paddingBottom, height } = originStyle(ellipsisContainer)
-    const maxHeight = numberToPrecision(pxToNumber(lineHeight) * rows) +
-        pxToNumber(paddingTop) +
-        pxToNumber(paddingBottom);
-
-    if (numberToPrecision(pxToNumber(height)) <= maxHeight) {
-        ellipsisContainer.innerHTML = ''
-        return {
-            finished: circelNo > 0,
-            reactNode: content + (circelNo > 0 ? ellipsisStr : '')
-        }
-    } else if (content) {
-        circelNo++
-        return measure(
-            originEle,
-            rows,
-            content.slice(0, content.length - 1),
-            ellipsisStr,
-            circelNo
-        )
-    }
-}
-
 class Paragraph extends React.Component {
     constructor(props) {
         super(props)
@@ -86,6 +10,7 @@ class Paragraph extends React.Component {
             finished: false
         }
         this.content = null
+        this.ellipsisContainer = null
     }
 
     componentDidMount() {
@@ -98,10 +23,76 @@ class Paragraph extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        if (this.ellipsisContainer) {
+            document.body.removeChild(this.ellipsisContainer)
+            this.ellipsisContainer = null
+        }
+    }
+
+    pxToNumber = value => {
+        if (!value) return 0;
+        const match = value.match(/^\d*(\.\d*)?/);
+        return match ? Number(match[0]) : 0;
+    }
+
+    measure = (
+        originEle,
+        rows,
+        content,
+        ellipsisStr = '...',
+        circelNo = 0
+    ) => {
+        if (!this.ellipsisContainer) {
+            this.ellipsisContainer = originEle.cloneNode(true)
+            this.ellipsisContainer.setAttribute('aria-hidden', 'true')
+            document.body.appendChild(this.ellipsisContainer)
+        }
+
+        this.ellipsisContainer.style.position = 'fixed';
+        this.ellipsisContainer.style.left = '0';
+        this.ellipsisContainer.style.height = 'auto';
+        this.ellipsisContainer.style.minHeight = 'auto';
+        this.ellipsisContainer.style.maxHeight = 'auto';
+        this.ellipsisContainer.style.top = '-999999px';
+        this.ellipsisContainer.style.zIndex = '-1000';
+        this.ellipsisContainer.style.boxSizing = 'border-box';
+
+        // // clean up css overflow
+        this.ellipsisContainer.style.textOverflow = 'clip';
+        this.ellipsisContainer.style.whiteSpace = 'normal';
+        this.ellipsisContainer.style.webkitLineClamp = 'none';
+        this.ellipsisContainer.style.wordBreak = 'break-word';
+
+        this.ellipsisContainer.innerText = content + ellipsisStr
+
+        const { lineHeight, fontSize, paddingTop, paddingBottom } = window.getComputedStyle(this.ellipsisContainer)
+        const maxHeight = (this.pxToNumber(lineHeight) || this.pxToNumber(fontSize)) * rows +
+            this.pxToNumber(paddingTop) +
+            this.pxToNumber(paddingBottom);
+
+        if (this.ellipsisContainer.offsetHeight <= maxHeight) {
+            this.ellipsisContainer.innerHTML = ''
+            return {
+                finished: circelNo > 0,
+                reactNode: content + (circelNo > 0 ? ellipsisStr : '')
+            }
+        } else if (content) {
+            circelNo++
+            return this.measure(
+                originEle,
+                rows,
+                content.slice(0, content.length - 1),
+                ellipsisStr,
+                circelNo
+            )
+        }
+    }
+
     setParagraphData = (props = this.props) => {
         const { children, rows } = props
         if (!this.state.isExpand && (/^[1-9]\d*$/).test(rows)) {
-            const { finished, reactNode } = measure(this.content, rows, children)
+            const { finished, reactNode } = this.measure(this.content, rows, children)
             this.setState({
                 finished,
                 text: reactNode
