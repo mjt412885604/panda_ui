@@ -10,7 +10,8 @@ class PickerCity extends React.Component {
         dataMap: PropTypes.object,
         value: PropTypes.array,
         confirmText: PropTypes.string,
-        title: PropTypes.string
+        title: PropTypes.string,
+        subTitle: PropTypes.string,
     }
 
     static defaultProps = {
@@ -18,6 +19,7 @@ class PickerCity extends React.Component {
         dataMap: { id: 'label', items: 'children' },
         value: [],
         title: '',
+        subTitle: '',
         confirmText: '确定',
     }
 
@@ -106,6 +108,7 @@ class PickerCity extends React.Component {
         return (
             <Picker
                 title={this.props.title}
+                subTitle={this.props.subTitle}
                 canceltext={this.props.canceltext}
                 confirmText={this.props.confirmText}
                 data={this.state.groups}

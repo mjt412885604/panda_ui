@@ -10,6 +10,7 @@ export interface PickerCityProps {
     data: PickerCityData[];
     value?: any[];
     title?: string;
+    subTitle?: string;
     confirmText?: string;
     dataMap?: {
         id?: string;

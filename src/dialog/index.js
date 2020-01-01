@@ -58,7 +58,7 @@ const Dialog = (props) => {
                 'pandaui-dialog__btn': true,
                 'pandaui-dialog__btn_default': type === 'default',
                 'pandaui-dialog__btn_primary': type === 'primary'
-            });
+            })
 
             return (
                 <span key={idx} {...others} className={className}>{label}</span>

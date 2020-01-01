@@ -13,6 +13,7 @@ export interface PickerProps {
     data: PickerData[],
     confirmText?: string;
     title?: string;
+    subTitle?: string;
     onChange?: (data: number[]) => void;
     onCancel?: () => void;
 }

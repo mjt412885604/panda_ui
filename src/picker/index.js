@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import PickerGroup from './picker_group'
-import classNames from 'classnames'
-import Mask from '../mask'
+import Drawer from '../drawer'
 import './style.scss'
 
 class Picker extends Component {
@@ -13,12 +12,14 @@ class Picker extends Component {
         onChange: PropTypes.func,
         onCancel: PropTypes.func,
         confirmText: PropTypes.string,
-        title: PropTypes.string
+        title: PropTypes.string,
+        subTitle: PropTypes.string
     }
 
     static defaultProps = {
         data: [],
         title: '',
+        subTitle: '',
         canceltext: '取消',
         confirmText: '确定',
     }
@@ -34,7 +35,9 @@ class Picker extends Component {
     }
 
     handleChanges = () => {
-        this.closePicker(() => {
+        this.setState({
+            show: false
+        }, () => {
             this.props.onChange && this.props.onChange(this.state.selected, this)
         })
     }
@@ -50,22 +53,10 @@ class Picker extends Component {
         })
     }
 
-    closePicker = (callback) => {
-        this.setState({
-            closing: true
-        }, () => {
-            setTimeout(() => {
-                this.setState({
-                    closing: false,
-                    show: false
-                })
-                callback && callback()
-            }, 300)
-        })
-    }
-
     handleClose = () => {
-        this.closePicker(() => {
+        this.setState({
+            show: false
+        }, () => {
             this.props.onCancel && this.props.onCancel()
         })
     }
@@ -74,19 +65,6 @@ class Picker extends Component {
         this.setState({
             show: true
         })
-    }
-
-    renderActions = () => {
-        const { title } = this.props
-
-        return (
-            <div className="pandaui-picker__hd">
-                <button className="pandaui-icon-btn pandaui-icon-btn_close pandaui-picker__close" onClick={this.handleClose}></button>
-                {
-                    title ? <span className="pandaui-picker__title">{title}</span> : null
-                }
-            </div>
-        )
     }
 
     renderGroups = () => {
@@ -104,39 +82,28 @@ class Picker extends Component {
     }
 
     render() {
-        const { className, data, value, title, confirmText, onGroupChange, onChange, onCancel, ...others } = this.props
+        const { className, data, value, title, subTitle,confirmText, onGroupChange, onChange, onCancel, ...others } = this.props
         const { show } = this.state
-        const cls = classNames('pandaui-picker', {
-            'pandaui-animate-slide-up': show && !this.state.closing,
-            'pandaui-animate-slide-down': this.state.closing
-        }, className)
-
-        const maskCls = classNames({
-            'pandaui-animate-fade-in': show && !this.state.closing,
-            'pandaui-animate-fade-out': this.state.closing
-        })
 
         return (
             <>
                 <div onClick={this.handleOpen}>
                     {this.props.children}
                 </div>
-                {
-                    show ? (
-                        <div>
-                            <Mask className={maskCls} onClick={this.handleClose} />
-                            <div className={cls} ref={this.preventDefault} {...others}>
-                                {this.renderActions()}
-                                <div className="pandaui-picker__bd">
-                                    {this.renderGroups()}
-                                </div>
-                                <div className="pandaui-picker__ft">
-                                    <span onClick={this.handleChanges} className="btn">{confirmText}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ) : null
-                }
+                <Drawer
+                    show={show}
+                    title={title}
+                    subTitle={subTitle}
+                    buttons={[{
+                        label: confirmText,
+                        onClick: this.handleChanges
+                    }]}
+                    onCancel={this.handleClose}
+                >
+                    <div className="pandaui-picker__bd">
+                        {this.renderGroups()}
+                    </div>
+                </Drawer>
             </>
         )
     }

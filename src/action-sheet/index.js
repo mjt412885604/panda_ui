@@ -89,7 +89,7 @@ class ActionSheet extends Component {
                 <CSSTransition
                     in={show}
                     timeout={300}
-                    classNames="components-actionsheet"
+                    classNames="pandaui-actionSheet-transition"
                     unmountOnExit
                 >
                     <div>

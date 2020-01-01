@@ -1,0 +1,183 @@
+@import '../style/colors';
+
+.body-frozen {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+}
+
+.pandaui-drawer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 80vh;
+    z-index: 5000;
+    line-height: 1.4;
+    background-color: #FFFFFF;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    overflow: hidden;
+    padding: 0 calc(24px + constant(safe-area-inset-right)) constant(safe-area-inset-bottom) calc(24px + constant(safe-area-inset-left));
+    padding: 0 calc(24px + env(safe-area-inset-right)) env(safe-area-inset-bottom) calc(24px + env(safe-area-inset-left));
+}
+
+.pandaui-drawer__hd {
+    height: 64px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.pandaui-icon-btn {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 100%;
+    border: 0;
+    outline: 0;
+    font-size: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'%3E  %3Cdefs%3E    %3Cpath id='33cf2e7b-22e9-42d7-9c56-a9f4a4e03565-a' d='M8 6.943L1.807.75.75 1.807 6.943 8 .75 14.193l1.057 1.057L8 9.057l6.193 6.193 1.057-1.057L9.057 8l6.193-6.193L14.193.75z'/%3E  %3C/defs%3E  %3Cg fill='none' fill-rule='evenodd' transform='translate(-16 -20)'%3E    %3Cpath fill='%23FFF' d='M0 12C0 5.373 5.367 0 12 0h390c6.628 0 12 5.374 12 12v52H0V12z'/%3E    %3Cuse fill='%23000' fill-opacity='.9' transform='translate(20 24)' xlink:href='%2333cf2e7b-22e9-42d7-9c56-a9f4a4e03565-a'/%3E  %3C/g%3E%3C/svg%3E");
+}
+
+.pandaui-drawer__hd .pandaui-icon-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pandaui-drawer__hd__side {
+    position: relative;
+    left: -8px;
+}
+
+.pandaui-drawer__hd__main {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.pandaui-drawer__hd__side+.pandaui-drawer__hd__main {
+    text-align: center;
+    padding: 0 40px;
+}
+
+.pandaui-drawer__hd__main+.pandaui-drawer__hd__side {
+    right: -8px;
+    left: auto;
+}
+
+.pandaui-drawer__hd__main+.pandaui-drawer__hd__side .pandaui-icon-btn {
+    right: 0;
+}
+
+.pandaui-drawer__title {
+    display: block;
+    color: rgba(0, 0, 0, 0.9);
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.pandaui-drawer__subtitle {
+    display: block;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+}
+
+.pandaui-drawer__bd {
+    word-wrap: break-word;
+    hyphens: auto;
+    max-height: calc(80vh - 180px);
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+.pandaui-drawer .pandaui-btn {
+    position: relative;
+    display: block;
+    width: 184px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 17px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    line-height: 1.41176471;
+    border-radius: 4px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: $themeColor;
+
+    &.pandaui-btn_default {
+        background-color: #F2F2F2;
+        color: $themeColor;
+    }
+}
+
+.pandaui-drawer__ft {
+    padding: 40px 24px 32px;
+    text-align: center;
+}
+
+.pandaui-drawer__ft .pandaui-btn:nth-last-child(n+2),
+.pandaui-drawer__ft .pandaui-btn:nth-last-child(n+2)~.pandaui-btn {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 8px;
+    width: 120px;
+}
+
+.pandaui-drawer-transition {
+    &-enter {
+        .pandaui-mask {
+            opacity: 0;
+        }
+
+        .pandaui-drawer {
+            transform: translate3d(0, 100%, 0);
+        }
+
+        &-active {
+            .pandaui-mask {
+                opacity: 1;
+                transition: opacity .3s;
+            }
+
+            .pandaui-drawer {
+                transform: translate3d(0, 0, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+
+    &-exit {
+        .pandaui-mask {
+            opacity: 1;
+        }
+
+        .pandaui-drawer {
+            transform: translate3d(0, 0, 0);
+        }
+
+        &-active {
+            .pandaui-mask {
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .pandaui-drawer {
+                transform: translate3d(0, 100%, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+}

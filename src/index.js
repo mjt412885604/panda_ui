@@ -3,6 +3,7 @@ import Avatar from './avatar'
 import Button from './button'
 import Dialog from './dialog'
 import Download from './download'
+import Drawer from './drawer'
 import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
@@ -20,6 +21,7 @@ export {
     Button,
     Dialog,
     Download,
+    Drawer,
     ListEmpty,
     Loading,
     Mask,

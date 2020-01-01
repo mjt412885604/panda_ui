@@ -4,6 +4,7 @@ export interface PickerDateProps {
     value: string;
     confirmText?: string;
     title?: string;
+    subTitle?: string;
     start?: string;
     end?: string;
     onChange?: (data: any[]) => void;

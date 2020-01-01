@@ -11,6 +11,7 @@ class PickerDate extends React.Component {
         value: PropTypes.string,
         confirmText: PropTypes.string,
         title: PropTypes.string,
+        subTitle: PropTypes.string,
         start: PropTypes.string,
         end: PropTypes.string,
         onChange: PropTypes.func,
@@ -21,6 +22,7 @@ class PickerDate extends React.Component {
         dataMap: { id: 'label', items: 'children' },
         value: '',
         title: '',
+        subTitle: '',
         confirmText: '确定',
         start: dateFormat(new Date().setFullYear(dateFormat()[0] - 1)).join('-'),
         end: dateFormat().join('-')
@@ -113,6 +115,7 @@ class PickerDate extends React.Component {
         return (
             <Picker
                 title={this.props.title}
+                subTitle={this.props.subTitle}
                 canceltext={this.props.canceltext}
                 confirmText={this.props.confirmText}
                 data={this.state.groups}

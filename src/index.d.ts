@@ -84,6 +84,27 @@ declare class Download extends React.Component<DownloadProps> {
     render(): JSX.Element;
 }
 
+export interface DrawerButtons {
+    label: string;
+    type?: 'default';
+    onClick: (node: HTMLElement) => void;
+    [index: string]: any;
+}
+
+export interface DrawerProps {
+    className?: string;
+    title?: string;
+    subTitle?: string;
+    show: boolean;
+    scroll?: boolean;
+    buttons: DrawerButtons[];
+    onCancel: () => any;
+}
+
+declare class Drawer extends React.Component<DrawerProps> {
+    render(): JSX.Element;
+}
+
 export interface ListEmptyProps {
     className?: string;
     empty?: boolean;
@@ -156,6 +177,7 @@ export interface PickerProps {
     data: PickerData[],
     confirmText?: string;
     title?: string;
+    subTitle?: string;
     onChange?: (data: number[]) => void;
     onCancel?: () => void;
 }
@@ -174,6 +196,7 @@ export interface PickerCityProps {
     data: PickerCityData[];
     value?: any[];
     title?: string;
+    subTitle?: string;
     confirmText?: string;
     dataMap?: {
         id?: string;
@@ -201,6 +224,7 @@ export interface PickerDateProps {
     value: string;
     confirmText?: string;
     title?: string;
+    subTitle?: string;
     start?: string;
     end?: string;
     onChange?: (data: any[]) => void;
@@ -274,6 +298,7 @@ export {
     Button,
     Dialog,
     Download,
+    Drawer,
     ListEmpty,
     Loading,
     Mask,
