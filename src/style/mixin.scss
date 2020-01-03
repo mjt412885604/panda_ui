@@ -1,0 +1,81 @@
+@mixin trasitionSliderUp($mask:'pandaui-mask', $content:'pandaui-drawer') {
+    &-enter {
+        .#{$mask} {
+            opacity: 0;
+        }
+
+        .#{$content} {
+            transform: translate3d(0, 100%, 0);
+        }
+
+        &-active {
+            .#{$mask} {
+                opacity: 1;
+                transition: opacity .3s;
+            }
+
+            .#{$content} {
+                transform: translate3d(0, 0, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+
+    &-exit {
+        .#{$mask} {
+            opacity: 1;
+        }
+
+        .#{$content} {
+            transform: translate3d(0, 0, 0);
+        }
+
+        &-active {
+            .#{$mask} {
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .#{$content} {
+                transform: translate3d(0, 100%, 0);
+                transition: transform .3s;
+            }
+        }
+    }
+}
+
+@mixin trasitionOpacity($mask:'pandaui-mask', $content:'pandaui-dialog') {
+    &-enter {
+
+        .#{$mask},
+        .#{$content} {
+            opacity: 0;
+        }
+
+        &-active {
+
+            .#{$mask},
+            .#{$content} {
+                opacity: 1;
+                transition: opacity .3s;
+            }
+        }
+    }
+
+    &-exit {
+
+        .#{$mask},
+        .#{$content} {
+            opacity: 1;
+        }
+
+        &-active {
+
+            .#{$mask},
+            .#{$content} {
+                opacity: 0;
+                transition: opacity .3s;
+            }
+        }
+    }
+}

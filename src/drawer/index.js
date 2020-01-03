@@ -1,65 +1,38 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 import Mask from '../mask'
 import './style.scss'
 
-class Drawer extends React.Component {
-    static propTypes = {
-        className: PropTypes.string,
-        title: PropTypes.string,
-        subTitle: PropTypes.string,
-        show: PropTypes.bool,
-        scroll: PropTypes.bool,
-        buttons: PropTypes.array,
-        onCancel: PropTypes.func,
-    }
+const Drawer = (props) => {
+    const { className, title, scroll, subTitle, show, buttons, children, onCancel, ...rest } = props
+    const scrollTop = useRef(0)
 
-    static defaultProps = {
-        className: '',
-        title: '',
-        subTitle: '',
-        show: false,
-        scroll: false,
-        buttons: [],
-        onCancel: () => { }
-    }
+    useEffect(() => {
+        if (scroll && show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
+            scrollTop.current = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset // 滚动距离顶部距离
+            document.body.className = document.body.className + 'pandaui-body-frozen'
+            document.body.style.top = `-${scrollTop.current}px`
+        } else {
+            destoryDialog()
+        }
+    }, [show])
 
-    componentDidMount() {
-        this.setBodyFixed(this.props)
-    }
+    useEffect(() => () => {
+        destoryDialog()
+    }, [])
 
-    componentWillReceiveProps(nextProps) {
-        this.setBodyFixed(nextProps)
-    }
-
-    componentWillUnmount() {
-        this.destoryDialog()
-    }
-
-    destoryDialog = () => {
-        if (this.props.scroll) {
-            document.body.removeAttribute('class')
-            document.body.removeAttribute('style')
-            this.scrollTop && window.scrollTo(0, this.scrollTop)
+    const destoryDialog = () => {
+        if (scroll) {
+            document.body.className = document.body.className.replace(/pandaui-body-frozen/g, '')
+            document.body.style.top = null
+            scrollTop.current && window.scrollTo(0, scrollTop.current)
         }
     }
 
-    setBodyFixed = ({ show }) => {
-        if (this.props.scroll) {
-            if (show && document.body.className.indexOf('body-frozen') == -1) {
-                this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset // 滚动距离顶部距离
-                document.body.className = 'body-frozen'
-                document.body.style['top'] = `-${this.scrollTop}px`
-            } else {
-                this.destoryDialog()
-            }
-        }
-    }
-
-    renderButtons = () => {
-        return this.props.buttons.map((action, idx) => {
+    const renderButtons = () => {
+        return buttons.map((action, idx) => {
             const { type, label, ...others } = action
             const className = classNames({
                 'pandaui-btn': true,
@@ -72,52 +45,67 @@ class Drawer extends React.Component {
         })
     }
 
-    preventDefault = (evt) => {
-        if (evt && !this.props.scroll) {
+    const preventDefault = (evt) => {
+        if (evt && !scroll) {
             evt.addEventListener('touchmove', function (e) {
                 e.preventDefault()
             })
         }
     }
 
-    render() {
-        const { className, title, scroll, subTitle, show, buttons, children, onCancel, ...rest } = this.props
-        return (
-            <CSSTransition
-                in={show}
-                timeout={300}
-                classNames="pandaui-drawer-transition"
-                unmountOnExit
-            >
-                <div ref={this.preventDefault}>
-                    <Mask onClick={onCancel} />
-                    <div className={classNames('pandaui-drawer', className)} {...rest}>
-                        <div className="pandaui-drawer__hd">
-                            <div className="pandaui-drawer__hd__side">
-                                <button className="pandaui-icon-btn" onClick={onCancel}>关闭</button>
-                            </div>
-                            <div className="pandaui-drawer__hd__main">
-                                {
-                                    title ? <strong className="pandaui-drawer__title">{title}</strong> : null
-                                }
-                                {
-                                    subTitle ? <strong className="pandaui-drawer__subtitle">{subTitle}</strong> : null
-                                }
-                            </div>
+    return (
+        <CSSTransition
+            in={show}
+            timeout={300}
+            classNames="pandaui-drawer-transition"
+            unmountOnExit
+        >
+            <div ref={preventDefault}>
+                <Mask onClick={onCancel} />
+                <div className={classNames('pandaui-drawer', className)} {...rest}>
+                    <div className="pandaui-drawer__hd">
+                        <button className="pandaui-icon-btn" onClick={onCancel}>关闭</button>
+                        <div className="pandaui-drawer__hd__main">
+                            {
+                                title ? <strong className="pandaui-drawer__title">{title}</strong> : null
+                            }
+                            {
+                                subTitle ? <strong className="pandaui-drawer__subtitle">{subTitle}</strong> : null
+                            }
                         </div>
-                        <div className="pandaui-drawer__bd">{children}</div>
-                        {
-                            buttons
-                                && Array.isArray(buttons)
-                                && buttons.length > 0 ?
-                                <div className="pandaui-drawer__ft">{this.renderButtons()}</div>
-                                : null
-                        }
                     </div>
+                    <div className="pandaui-drawer__bd">{children}</div>
+                    {
+                        buttons
+                            && Array.isArray(buttons)
+                            && buttons.length > 0 ?
+                            <div className="pandaui-drawer__ft">{renderButtons()}</div>
+                            : null
+                    }
                 </div>
-            </CSSTransition>
-        )
-    }
+            </div>
+        </CSSTransition>
+    )
+}
+
+Drawer.propTypes = {
+    className: PropTypes.string,
+    title: PropTypes.string,
+    subTitle: PropTypes.string,
+    show: PropTypes.bool,
+    scroll: PropTypes.bool,
+    buttons: PropTypes.array,
+    onCancel: PropTypes.func,
+}
+
+Drawer.defaultProps = {
+    className: '',
+    title: '',
+    subTitle: '',
+    show: false,
+    scroll: false,
+    buttons: [],
+    onCancel: () => { }
 }
 
 export default Drawer;

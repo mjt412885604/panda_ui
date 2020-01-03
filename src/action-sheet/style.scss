@@ -1,8 +1,9 @@
+@import '../style/mixin.scss';
+
 .pandaui-actionsheet {
     position: fixed;
     left: 0;
     bottom: 0;
-    transform: translate(0, 100%);
     backface-visibility: hidden;
     z-index: 5000;
     width: 100%;
@@ -92,57 +93,6 @@
     display: none;
 }
 
-.pandaui-actionsheet_toggle {
-    -webkit-transform: translate(0, 0);
-    transform: translate(0, 0);
-}
-
-.pandaui-actionsheet.active {
-    transition: none;
-}
-
 .pandaui-actionSheet-transition {
-    &-enter {
-        .pandaui-mask {
-            opacity: 0;
-        }
-
-        .pandaui-actionsheet {
-            transform: translate3d(0, 100%, 0);
-        }
-
-        &-active {
-            .pandaui-mask {
-                opacity: 1;
-                transition: opacity .3s;
-            }
-
-            .pandaui-actionsheet {
-                transform: translate3d(0, 0, 0);
-                transition: transform .3s;
-            }
-        }
-    }
-
-    &-exit {
-        .pandaui-mask {
-            opacity: 1;
-        }
-
-        .pandaui-actionsheet {
-            transform: translate3d(0, 0, 0);
-        }
-
-        &-active {
-            .pandaui-mask {
-                opacity: 0;
-                transition: opacity .3s;
-            }
-
-            .pandaui-actionsheet {
-                transform: translate3d(0, 100%, 0);
-                transition: transform .3s;
-            }
-        }
-    }
+    @include trasitionSliderUp('pandaui-mask', 'pandaui-actionsheet');
 }

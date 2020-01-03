@@ -27,7 +27,7 @@ export interface PickerCityState {
 }
 
 declare class PickerCity extends React.Component<PickerCityProps, PickerCityState> {
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num:number): void;
+    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
     updateDataBySelected(selected: any, idex: any): void;
     updateGroup(...rest: any[]): void;
     handleChange(selected: any): void;

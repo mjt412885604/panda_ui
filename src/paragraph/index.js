@@ -46,23 +46,24 @@ class Paragraph extends React.Component {
         if (!this.ellipsisContainer) {
             this.ellipsisContainer = originEle.cloneNode(true)
             this.ellipsisContainer.setAttribute('aria-hidden', 'true')
+
+            this.ellipsisContainer.style.position = 'fixed';
+            this.ellipsisContainer.style.left = '0';
+            this.ellipsisContainer.style.height = 'auto';
+            this.ellipsisContainer.style.minHeight = 'auto';
+            this.ellipsisContainer.style.maxHeight = 'auto';
+            this.ellipsisContainer.style.top = '-999999px';
+            this.ellipsisContainer.style.zIndex = '-1000';
+            this.ellipsisContainer.style.boxSizing = 'border-box';
+
+            // // clean up css overflow
+            this.ellipsisContainer.style.textOverflow = 'clip';
+            this.ellipsisContainer.style.whiteSpace = 'normal';
+            this.ellipsisContainer.style.webkitLineClamp = 'none';
+            this.ellipsisContainer.style.wordBreak = 'break-word';
+
             document.body.appendChild(this.ellipsisContainer)
         }
-
-        this.ellipsisContainer.style.position = 'fixed';
-        this.ellipsisContainer.style.left = '0';
-        this.ellipsisContainer.style.height = 'auto';
-        this.ellipsisContainer.style.minHeight = 'auto';
-        this.ellipsisContainer.style.maxHeight = 'auto';
-        this.ellipsisContainer.style.top = '-999999px';
-        this.ellipsisContainer.style.zIndex = '-1000';
-        this.ellipsisContainer.style.boxSizing = 'border-box';
-
-        // // clean up css overflow
-        this.ellipsisContainer.style.textOverflow = 'clip';
-        this.ellipsisContainer.style.whiteSpace = 'normal';
-        this.ellipsisContainer.style.webkitLineClamp = 'none';
-        this.ellipsisContainer.style.wordBreak = 'break-word';
 
         this.ellipsisContainer.innerText = content + ellipsisStr
 

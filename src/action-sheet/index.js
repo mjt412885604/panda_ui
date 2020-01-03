@@ -78,10 +78,6 @@ class ActionSheet extends Component {
     render() {
         const { className, title, cancelText, children } = this.props
         const { show } = this.state
-        const cls = classNames('active', {
-            'pandaui-actionsheet': true,
-            'pandaui-actionsheet_toggle': show
-        })
 
         return (
             <>
@@ -94,7 +90,7 @@ class ActionSheet extends Component {
                 >
                     <div>
                         <Mask onClick={this.hideActionSheet} />
-                        <div ref={this.preventDefault} className={cls}>
+                        <div ref={this.preventDefault} className="pandaui-actionsheet">
                             {title ? <div className="pandaui-actionsheet__title">{title}</div> : null}
                             <div className="pandaui-actionsheet__menu">
                                 {this.renderMenus()}

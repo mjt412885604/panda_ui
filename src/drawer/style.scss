@@ -1,6 +1,7 @@
 @import '../style/colors';
+@import '../style/mixin.scss';
 
-.body-frozen {
+.pandaui-body-frozen {
     position: fixed;
     width: 100%;
     overflow: hidden;
@@ -30,6 +31,7 @@
     -webkit-box-align: center;
     -webkit-align-items: center;
     align-items: center;
+    position: relative;
 }
 
 .pandaui-icon-btn {
@@ -48,32 +50,16 @@
 .pandaui-drawer__hd .pandaui-icon-btn {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-}
-
-.pandaui-drawer__hd__side {
-    position: relative;
     left: -8px;
+    transform: translateY(-50%);
 }
 
 .pandaui-drawer__hd__main {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
-}
-
-.pandaui-drawer__hd__side+.pandaui-drawer__hd__main {
     text-align: center;
     padding: 0 40px;
-}
-
-.pandaui-drawer__hd__main+.pandaui-drawer__hd__side {
-    right: -8px;
-    left: auto;
-}
-
-.pandaui-drawer__hd__main+.pandaui-drawer__hd__side .pandaui-icon-btn {
-    right: 0;
 }
 
 .pandaui-drawer__title {
@@ -132,52 +118,10 @@
 .pandaui-drawer__ft .pandaui-btn:nth-last-child(n+2)~.pandaui-btn {
     display: inline-block;
     vertical-align: top;
-    margin: 0 8px;
+    margin-right: 8px;
     width: 120px;
 }
 
 .pandaui-drawer-transition {
-    &-enter {
-        .pandaui-mask {
-            opacity: 0;
-        }
-
-        .pandaui-drawer {
-            transform: translate3d(0, 100%, 0);
-        }
-
-        &-active {
-            .pandaui-mask {
-                opacity: 1;
-                transition: opacity .3s;
-            }
-
-            .pandaui-drawer {
-                transform: translate3d(0, 0, 0);
-                transition: transform .3s;
-            }
-        }
-    }
-
-    &-exit {
-        .pandaui-mask {
-            opacity: 1;
-        }
-
-        .pandaui-drawer {
-            transform: translate3d(0, 0, 0);
-        }
-
-        &-active {
-            .pandaui-mask {
-                opacity: 0;
-                transition: opacity .3s;
-            }
-
-            .pandaui-drawer {
-                transform: translate3d(0, 100%, 0);
-                transition: transform .3s;
-            }
-        }
-    }
+    @include trasitionSliderUp('pandaui-mask', 'pandaui-drawer');
 }
