@@ -1,24 +1,24 @@
 import * as React from 'react'
 
-export interface DrawerButtons {
+export interface PopupButtons {
     label: string;
     type?: 'default';
     onClick: (node: HTMLElement) => void;
     [index: string]: any;
 }
 
-export interface DrawerProps {
+export interface PopupProps {
     className?: string;
     title?: string;
     subTitle?: string;
     show: boolean;
     scroll?: boolean;
-    buttons: DrawerButtons[];
+    buttons: PopupButtons[];
     onCancel: () => any;
 }
 
-declare class Drawer extends React.Component<DrawerProps> {
+declare class Popup extends React.Component<PopupProps> {
     render(): JSX.Element;
 }
 
-export default Drawer;
+export default Popup;

@@ -1,4 +1,4 @@
-@mixin trasitionSliderUp($mask:'pandaui-mask', $content:'pandaui-drawer') {
+@mixin trasitionSliderUp($mask:'pandaui-mask', $content:'pandaui-popup') {
     &-enter {
         .#{$mask} {
             opacity: 0;

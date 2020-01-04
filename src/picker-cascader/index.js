@@ -1,40 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Picker from '../picker'
-import { dateFormat, initPickerData } from './utils'
+import { isObject, isArray } from './utils'
 
-class PickerDate extends React.Component {
+class PickerCascader extends React.Component {
 
     static propTypes = {
-        value: PropTypes.oneOfType(
-            [PropTypes.string, PropTypes.array]
-        ),
+        data: PropTypes.array.isRequired,
+        value: PropTypes.array,
         confirmText: PropTypes.string,
         title: PropTypes.string,
         subTitle: PropTypes.string,
-        start: PropTypes.string,
-        end: PropTypes.string,
         onChange: PropTypes.func,
-        onCancel: PropTypes.func
     }
 
     static defaultProps = {
+        data: [],
         value: [],
         title: '',
         subTitle: '',
         confirmText: '确定',
-        start: dateFormat(new Date().setFullYear(dateFormat()[0] - 1)).join('-'),
-        end: dateFormat().join('-'),
-        onChange: () => { },
-        onCancel: () => { }
+        onChange: () => { }
     }
 
     constructor(props) {
         super(props);
-        const { start, end, value } = this.props
-        this.data = initPickerData({ start, end })
-        const _selected = typeof value == 'string' ? value.split('-') : []
-        const { groups, selected } = this.initPickerData(this.data, _selected)
+        const { data, value } = this.props
+        const { groups, selected } = this.initPickerData(data, value)
         this.state = {
             groups,
             selected
@@ -45,13 +37,13 @@ class PickerDate extends React.Component {
     initPickerData = (data, selected = [], group = [], newselected = [], num = 0) => {
         let _selected = 0;
 
-        if (Array.isArray(selected) && selected.length > 0 && selected[num]) {
+        if (isArray(selected) && selected.length > 0 && selected[num]) {
             const item = selected[num]
-            if (typeof item == 'string') {
-                const index = data.findIndex(v => v.value == item)
+            if ((isObject(item) && item.label) || typeof item == 'string') {
+                const index = data.findIndex(v => v.label == (typeof item == 'string' ? item : item.label))
                 _selected = index == -1 ? 0 : index
             } else {
-                _selected = item
+                _selected = selected[num]
             }
         }
 
@@ -64,7 +56,7 @@ class PickerDate extends React.Component {
 
         group.push(data.map(({ children, ...reset }) => reset))
 
-        if (item['children'] && Array.isArray(item['children'])) {
+        if (item['children'] && isArray(item['children'])) {
             num++
             return this.initPickerData(
                 item['children'],
@@ -81,7 +73,7 @@ class PickerDate extends React.Component {
     }
 
     updateDataBySelected = (_selected, cb) => {
-        const { groups, selected } = this.initPickerData(this.data, _selected)
+        const { groups, selected } = this.initPickerData(this.props.data, _selected)
 
         try {
             this.text = groups.map((group, i) => group[selected[i]])
@@ -102,7 +94,7 @@ class PickerDate extends React.Component {
     }
 
     handleChange = (selected) => {
-        if (selected == this.state.selected) {
+        if (selected === this.state.selected) {
             this.updateDataBySelected(selected, () => {
                 this.props.onChange(this.text)
             })
@@ -128,4 +120,4 @@ class PickerDate extends React.Component {
     }
 }
 
-export default PickerDate;
+export default PickerCascader;

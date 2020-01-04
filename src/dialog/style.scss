@@ -2,9 +2,7 @@
 @import '../style/mixin';
 
 .pandaui-body-frozen {
-    position: fixed;
-    width: 100%;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .pandaui-dialog {

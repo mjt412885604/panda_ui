@@ -8,7 +8,7 @@ export const dateFormat = (date = new Date()) => {
     return [year, month, day]
 }
 
-export const fullNumber = (number) => number < 10 ? `0${number}` : number
+export const fullNumber = (number) => number < 10 ? `0${number}` : `${number}`
 
 export const getMaxDay = (year, month) => {
     if ([4, 6, 9, 11].indexOf(+month) > -1) {
@@ -85,13 +85,13 @@ export const initPickerData = (options) => {
 
     const satrtDate = [{
         label: baseStartDate[0] + '年',
-        value: baseStartDate[0],
+        value: fullNumber(baseStartDate[0]),
         children: setMonths(baseStartDate, 0)
     }]
 
     const endDate = [{
         label: baseEndDate[0] + '年',
-        value: baseEndDate[0],
+        value: fullNumber(baseEndDate[0]),
         children: setMonths(baseEndDate, 1)
     }]
 
@@ -99,7 +99,7 @@ export const initPickerData = (options) => {
     for (let i = baseStartDate[0] + 1; i < baseEndDate[0]; i++) {
         middleDate.push({
             label: i + '年',
-            value: String(i),
+            value: fullNumber(i),
             children: setMonths([i], 2)
         })
     }

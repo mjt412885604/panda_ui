@@ -1,55 +1,78 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import PickerGroup from './picker_group'
-import Drawer from '../drawer'
-import './style.scss'
+import classnames from 'classnames'
+import PickerGroup from './pickerGroup'
+import Popup from '../popup'
 
-class Picker extends Component {
+class Picker extends React.Component {
+
     static propTypes = {
         data: PropTypes.array,
         value: PropTypes.array,
-        onGroupChange: PropTypes.func,
+        title: PropTypes.string,
+        subTitle: PropTypes.string,
+        className: PropTypes.string,
+        confirmText: PropTypes.string,
         onChange: PropTypes.func,
         onCancel: PropTypes.func,
-        confirmText: PropTypes.string,
-        title: PropTypes.string,
-        subTitle: PropTypes.string
+        onGroupChange: PropTypes.func,
     }
 
     static defaultProps = {
         data: [],
+        value: [],
         title: '',
         subTitle: '',
-        canceltext: '取消',
+        className: '',
         confirmText: '确定',
+        onChange: () => { },
+        onCancel: () => { },
+        onGroupChange: () => { }
     }
 
     constructor(props) {
         super(props);
-
         this.state = {
-            selected: this.props.value || Array(this.props.data.length).fill(-1),
-            closing: false,
             show: false,
+        }
+        this.selected = Array.isArray(this.props.value) ? this.props.value : Array(this.props.data.length).fill(null)
+    }
+
+    handleChange = (item, index, groupIndex) => {
+        this.selected[groupIndex] = index
+        this.props.onGroupChange(item, index, groupIndex, this.selected, this)
+    }
+
+    renderGroups = () => {
+        const selected = Array.isArray(this.props.value) ? this.props.value : Array(this.props.data.length).fill(null)
+
+        if (Array.isArray(this.props.data[0])) {
+            return this.props.data.map((item, i) => (
+                <PickerGroup
+                    key={i}
+                    items={item}
+                    groupIndex={i}
+                    temp={+selected[i]}
+                    onChange={this.handleChange}
+                />
+            ))
+        } else {
+            return (
+                <PickerGroup
+                    items={this.props.data}
+                    groupIndex={0}
+                    temp={+selected[0]}
+                    onChange={this.handleChange}
+                />
+            )
         }
     }
 
-    handleChanges = () => {
+    onChange = () => {
         this.setState({
             show: false
         }, () => {
-            this.props.onChange && this.props.onChange(this.state.selected, this)
-        })
-    }
-
-    handleChange = (item, i, groupIndex) => {
-        let selected = this.state.selected;
-
-        selected[groupIndex] = i;
-        this.setState({ selected }, () => {
-            if (this.props.onGroupChange) {
-                this.props.onGroupChange(item, i, groupIndex, this.state.selected, this)
-            }
+            this.props.onChange(this.selected)
         })
     }
 
@@ -67,22 +90,8 @@ class Picker extends Component {
         })
     }
 
-    renderGroups = () => {
-        return this.props.data.map((group, i) => {
-            return <PickerGroup key={i} {...group} onChange={this.handleChange} groupIndex={i} defaultIndex={this.state.selected[i]} />;
-        })
-    }
-
-    preventDefault(evt) {
-        if (evt) {
-            evt.addEventListener('touchmove', function (e) {
-                e.preventDefault()
-            })
-        }
-    }
-
     render() {
-        const { className, data, value, title, subTitle,confirmText, onGroupChange, onChange, onCancel, ...others } = this.props
+        const { className, data, value, title, subTitle, confirmText, onGroupChange, onChange, onCancel, ...others } = this.props
         const { show } = this.state
 
         return (
@@ -90,20 +99,20 @@ class Picker extends Component {
                 <div onClick={this.handleOpen}>
                     {this.props.children}
                 </div>
-                <Drawer
+                <Popup
                     show={show}
                     title={title}
                     subTitle={subTitle}
                     buttons={[{
                         label: confirmText,
-                        onClick: this.handleChanges
+                        onClick: this.onChange
                     }]}
                     onCancel={this.handleClose}
                 >
-                    <div className="pandaui-picker__bd">
+                    <div className={classnames('pandaui-picker__bd', className)}>
                         {this.renderGroups()}
                     </div>
-                </Drawer>
+                </Popup>
             </>
         )
     }

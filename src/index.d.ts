@@ -84,27 +84,6 @@ declare class Download extends React.Component<DownloadProps> {
     render(): JSX.Element;
 }
 
-export interface DrawerButtons {
-    label: string;
-    type?: 'default';
-    onClick: (node: HTMLElement) => void;
-    [index: string]: any;
-}
-
-export interface DrawerProps {
-    className?: string;
-    title?: string;
-    subTitle?: string;
-    show: boolean;
-    scroll?: boolean;
-    buttons: DrawerButtons[];
-    onCancel: () => any;
-}
-
-declare class Drawer extends React.Component<DrawerProps> {
-    render(): JSX.Element;
-}
-
 export interface ListEmptyProps {
     className?: string;
     empty?: boolean;
@@ -245,6 +224,27 @@ declare class PickerDate extends React.Component<PickerDateProps, PickerDateStat
     render(): JSX.Element;
 }
 
+export interface PopupButtons {
+    label: string;
+    type?: 'default';
+    onClick: (node: HTMLElement) => void;
+    [index: string]: any;
+}
+
+export interface PopupProps {
+    className?: string;
+    title?: string;
+    subTitle?: string;
+    show: boolean;
+    scroll?: boolean;
+    buttons: PopupButtons[];
+    onCancel: () => any;
+}
+
+declare class Popup extends React.Component<PopupProps> {
+    render(): JSX.Element;
+}
+
 export interface ScrollProps {
     loadMore: boolean;
     loadText?: string;
@@ -298,7 +298,6 @@ export {
     Button,
     Dialog,
     Download,
-    Drawer,
     ListEmpty,
     Loading,
     Mask,
@@ -306,6 +305,7 @@ export {
     Picker,
     PickerCity,
     PickerDate,
+    Popup,
     Scroll,
     Skeleton,
     Toast

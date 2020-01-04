@@ -2,12 +2,12 @@
 @import '../style/mixin.scss';
 
 .pandaui-body-frozen {
-    position: fixed;
-    width: 100%;
+    // position: fixed;
+    // width: 100%;
     overflow: hidden;
 }
 
-.pandaui-drawer {
+.pandaui-popup {
     position: fixed;
     left: 0;
     right: 0;
@@ -23,7 +23,7 @@
     padding: 0 calc(24px + env(safe-area-inset-right)) env(safe-area-inset-bottom) calc(24px + env(safe-area-inset-left));
 }
 
-.pandaui-drawer__hd {
+.pandaui-popup__hd {
     height: 64px;
     display: -webkit-box;
     display: -webkit-flex;
@@ -47,14 +47,14 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'%3E  %3Cdefs%3E    %3Cpath id='33cf2e7b-22e9-42d7-9c56-a9f4a4e03565-a' d='M8 6.943L1.807.75.75 1.807 6.943 8 .75 14.193l1.057 1.057L8 9.057l6.193 6.193 1.057-1.057L9.057 8l6.193-6.193L14.193.75z'/%3E  %3C/defs%3E  %3Cg fill='none' fill-rule='evenodd' transform='translate(-16 -20)'%3E    %3Cpath fill='%23FFF' d='M0 12C0 5.373 5.367 0 12 0h390c6.628 0 12 5.374 12 12v52H0V12z'/%3E    %3Cuse fill='%23000' fill-opacity='.9' transform='translate(20 24)' xlink:href='%2333cf2e7b-22e9-42d7-9c56-a9f4a4e03565-a'/%3E  %3C/g%3E%3C/svg%3E");
 }
 
-.pandaui-drawer__hd .pandaui-icon-btn {
+.pandaui-popup__hd .pandaui-icon-btn {
     position: absolute;
     top: 50%;
     left: -8px;
     transform: translateY(-50%);
 }
 
-.pandaui-drawer__hd__main {
+.pandaui-popup__hd__main {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
@@ -62,20 +62,20 @@
     padding: 0 40px;
 }
 
-.pandaui-drawer__title {
+.pandaui-popup__title {
     display: block;
     color: rgba(0, 0, 0, 0.9);
     font-weight: 700;
     font-size: 15px;
 }
 
-.pandaui-drawer__subtitle {
+.pandaui-popup__subtitle {
     display: block;
     color: rgba(0, 0, 0, 0.5);
     font-size: 10px;
 }
 
-.pandaui-drawer__bd {
+.pandaui-popup__bd {
     word-wrap: break-word;
     hyphens: auto;
     max-height: calc(80vh - 180px);
@@ -83,7 +83,7 @@
     overflow-y: auto;
 }
 
-.pandaui-drawer .pandaui-btn {
+.pandaui-popup .pandaui-btn {
     position: relative;
     display: block;
     width: 184px;
@@ -109,19 +109,19 @@
     }
 }
 
-.pandaui-drawer__ft {
+.pandaui-popup__ft {
     padding: 40px 24px 32px;
     text-align: center;
 }
 
-.pandaui-drawer__ft .pandaui-btn:nth-last-child(n+2),
-.pandaui-drawer__ft .pandaui-btn:nth-last-child(n+2)~.pandaui-btn {
+.pandaui-popup__ft .pandaui-btn:nth-last-child(n+2),
+.pandaui-popup__ft .pandaui-btn:nth-last-child(n+2)~.pandaui-btn {
     display: inline-block;
     vertical-align: top;
     margin-right: 8px;
     width: 120px;
 }
 
-.pandaui-drawer-transition {
-    @include trasitionSliderUp('pandaui-mask', 'pandaui-drawer');
+.pandaui-popup-transition {
+    @include trasitionSliderUp('pandaui-mask', 'pandaui-popup');
 }
