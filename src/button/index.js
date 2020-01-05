@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import Spinner from '../spinner'
 import './style.scss'
 
 export default class Button extends React.Component {
@@ -43,7 +44,7 @@ export default class Button extends React.Component {
                     onClick={onClick}
                     {...rest}
                 >
-                    {loading ? <span className="loading-box"><i className="icon-loading"></i></span> : ''}
+                    {loading ? <Spinner color="rgba(255, 255, 255, 0.8)" size={20} style={{ marginRight: 10 }} /> : null}
                     {children}
                 </button>
             </>

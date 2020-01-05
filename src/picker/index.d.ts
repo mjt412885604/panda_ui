@@ -3,18 +3,20 @@ import * as React from 'react'
 interface PickerDataItems {
     label: string;
     value?: string | number;
-}
-interface PickerData {
-    items: PickerDataItems[]
+    disabled?: boolean;
 }
 
+type PickerDataItem = PickerDataItems[] | PickerDataItems
+
 export interface PickerProps {
-    value?: any[];
-    data: PickerData[],
+    className?: string;
+    value?: Array<number | string>;
+    data: PickerDataItem[],
     confirmText?: string;
     title?: string;
     subTitle?: string;
     onChange?: (data: number[]) => void;
+    onGroupChange?: (...reset: any[]) => void;
     onCancel?: () => void;
 }
 

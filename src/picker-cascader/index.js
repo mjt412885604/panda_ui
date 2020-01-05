@@ -6,8 +6,10 @@ import { isObject, isArray } from './utils'
 class PickerCascader extends React.Component {
 
     static propTypes = {
-        data: PropTypes.array.isRequired,
-        value: PropTypes.array,
+        value: PropTypes.oneOfType(
+            [PropTypes.string, PropTypes.array]
+        ),
+        data: PropTypes.array,
         confirmText: PropTypes.string,
         title: PropTypes.string,
         subTitle: PropTypes.string,

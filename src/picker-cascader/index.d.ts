@@ -1,37 +1,34 @@
 import * as React from 'react'
 
-interface PickerCityData {
+interface PickerCascaderData {
     label: string;
-    value: string;
+    value?: string | number;
+    disabled?: boolean;
     children?: any[];
 }
 
-export interface PickerCityProps {
-    data: PickerCityData[];
-    value?: any[];
+type PickerCascaderValue = {
+    label: string;
+    [index: string]: any;
+} | string;
+
+export interface PickerCascaderProps {
+    data: PickerCascaderData[];
+    value?: PickerCascaderValue[];
     title?: string;
     subTitle?: string;
     confirmText?: string;
-    dataMap?: {
-        id?: string;
-        items?: string;
-    };
-    onChange?: (select: PickerCityData[]) => void;
+    onChange?: (select: PickerCascaderData[]) => void;
     onCancel?: () => void;
 }
 
-export interface PickerCityState {
+export interface PickerCascaderState {
     groups: any;
-    selected: number[];
-    text: any[];
+    selected: number | string[];
 }
 
-declare class PickerCity extends React.Component<PickerCityProps, PickerCityState> {
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
-    updateDataBySelected(selected: any, idex: any): void;
-    updateGroup(...rest: any[]): void;
-    handleChange(selected: any): void;
+declare class PickerCascader extends React.Component<PickerCascaderProps, PickerCascaderState> {
     render(): JSX.Element;
 }
 
-export default PickerCity;
+export default PickerCascader;

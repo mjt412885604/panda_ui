@@ -3,16 +3,18 @@ import Avatar from './avatar'
 import Button from './button'
 import Dialog from './dialog'
 import Download from './download'
-import Popup from './popup'
 import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
 import Paragraph from './paragraph'
 import Picker from './picker'
-import PickerCity from './picker-city'
+import PickerCascader from './picker-cascader'
 import PickerDate from './picker-date'
+import Popup from './popup'
 import Scroll from './scroll'
 import Skeleton from './skeleton'
+import Spinner from './spinner'
+import Switch from './switch'
 import Toast from './toast'
 
 export {
@@ -21,15 +23,17 @@ export {
     Button,
     Dialog,
     Download,
-    Popup,
     ListEmpty,
     Loading,
     Mask,
     Paragraph,
     Picker,
-    PickerCity,
+    PickerCascader,
     PickerDate,
+    Popup,
     Scroll,
     Skeleton,
+    Spinner,
+    Switch,
     Toast,
 }

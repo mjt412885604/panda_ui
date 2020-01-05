@@ -7,7 +7,6 @@ import './style.scss'
 
 const Dialog = (props) => {
     const { title, show, scroll, scrollHeight, className, children, buttons, ...others } = props
-    const scrollTop = useRef(0)
     const maxWindowHeight = document.documentElement.clientHeight * 0.9 - 150
 
     useEffect(() => () => {
@@ -15,10 +14,8 @@ const Dialog = (props) => {
     }, [])
 
     useEffect(() => {
-        if (scroll && show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
-            scrollTop.current = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset // 滚动距离顶部距离
+        if (show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
             document.body.className = document.body.className + 'pandaui-body-frozen'
-            document.body.style.top = `-${scrollTop.current}px`
         } else {
             destoryDialog()
         }
@@ -27,8 +24,6 @@ const Dialog = (props) => {
     const destoryDialog = () => {
         if (scroll) {
             document.body.className = document.body.className.replace(/pandaui-body-frozen/g, '')
-            document.body.style.top = null
-            scrollTop.current && window.scrollTo(0, scrollTop.current)
         }
     }
 

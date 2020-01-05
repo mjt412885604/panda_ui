@@ -72,7 +72,7 @@ class Picker extends React.Component {
         this.setState({
             show: false
         }, () => {
-            this.props.onChange(this.selected)
+            this.props.onChange([...this.selected])
         })
     }
 

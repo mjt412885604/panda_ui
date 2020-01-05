@@ -47,28 +47,4 @@
         right: 0;
         z-index: 10;
     }
-
-    &.loading .loading-box {
-        display: inline-flex;
-        margin-right: 10px;
-        animation: pandaui-mobile-button-loading 1s infinite both linear;
-
-        .icon-loading {
-            display: inline-flex;
-            height: 16px;
-            width: 16px;
-            background: url(./loading.svg) center center/cover no-repeat;
-        }
-    }
-}
-
-
-@keyframes pandaui-mobile-button-loading {
-    0% {
-        transform: rotate(0);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
 }

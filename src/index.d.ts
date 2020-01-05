@@ -146,18 +146,20 @@ declare class Paragraph extends React.Component<ParagraphProps, ParagraphState> 
 interface PickerDataItems {
     label: string;
     value?: string | number;
-}
-interface PickerData {
-    items: PickerDataItems[]
+    disabled?: boolean;
 }
 
+type PickerDataItem = PickerDataItems[] | PickerDataItems
+
 export interface PickerProps {
-    value?: any[];
-    data: PickerData[],
+    className?: string;
+    value?: Array<number | string>;
+    data: PickerDataItem[],
     confirmText?: string;
     title?: string;
     subTitle?: string;
     onChange?: (data: number[]) => void;
+    onGroupChange?: (...reset: any[]) => void;
     onCancel?: () => void;
 }
 
@@ -165,42 +167,39 @@ declare class Picker extends React.Component<PickerProps, any>{
     render(): JSX.Element;
 }
 
-interface PickerCityData {
+interface PickerCascaderData {
     label: string;
-    value: string;
-    children?: any[];
+    value?: string | number;
+    disabled?: boolean;
+    children?: PickerCascaderData[];
 }
 
-export interface PickerCityProps {
-    data: PickerCityData[];
-    value?: any[];
+type PickerCascaderValue = {
+    label: string;
+    [index: string]: any;
+} | string;
+
+export interface PickerCascaderProps {
+    data: PickerCascaderData[];
+    value?: PickerCascaderValue[];
     title?: string;
     subTitle?: string;
     confirmText?: string;
-    dataMap?: {
-        id?: string;
-        items?: string;
-    };
-    onChange?: (select: PickerCityData[]) => void;
+    onChange?: (select: PickerCascaderData[]) => void;
     onCancel?: () => void;
 }
 
-export interface PickerCityState {
+export interface PickerCascaderState {
     groups: any;
-    selected: number[];
-    text: any[];
+    selected: number | string[];
 }
 
-declare class PickerCity extends React.Component<PickerCityProps, PickerCityState> {
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
-    updateDataBySelected(selected: any, idex: any): void;
-    updateGroup(...rest: any[]): void;
-    handleChange(selected: any): void;
+declare class PickerCascader extends React.Component<PickerCascaderProps, PickerCascaderState> {
     render(): JSX.Element;
 }
 
 export interface PickerDateProps {
-    value: string;
+    value?: string;
     confirmText?: string;
     title?: string;
     subTitle?: string;
@@ -213,14 +212,9 @@ export interface PickerDateProps {
 export interface PickerDateState {
     groups: any;
     selected: number[];
-    text: any[];
 }
 
 declare class PickerDate extends React.Component<PickerDateProps, PickerDateState>{
-    parseData(data: any, subKey: any, selected: any[], group: any[], newselected: any[], num: number): void;
-    updateDataBySelected(selected: any, idex: any): void;
-    updateGroup(...rest: any[]): void;
-    handleChange(selected: any): void;
     render(): JSX.Element;
 }
 
@@ -276,6 +270,29 @@ declare class Skeleton extends React.Component<SkeletonProps> {
     render(): JSX.Element;
 }
 
+export interface SipnnerProps {
+    size?: number;
+    color?: string;
+    style?: React.CSSProperties;
+    className?: string;
+    type?: 'circle' | 'spinner';
+    vertical?: boolean;
+}
+
+declare const Spinner: React.FC<SipnnerProps>;
+
+export interface SwitchProps {
+    checked?: boolean;
+    loading?: boolean;
+    size?: number;
+    className?: string;
+    activeColor?: string;
+    inActiveColor?: string;
+    onChange?: () => void;
+}
+
+declare const Switch: React.FC<SwitchProps>;
+
 interface ToastOptions {
     time?: string;
     message: string;
@@ -303,10 +320,12 @@ export {
     Mask,
     Paragraph,
     Picker,
-    PickerCity,
+    PickerCascader,
     PickerDate,
     Popup,
     Scroll,
     Skeleton,
+    Spinner,
+    Switch,
     Toast
 }
