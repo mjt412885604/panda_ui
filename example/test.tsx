@@ -34,6 +34,15 @@ const lists = [[{
     label: '火车4'
 }]]
 
+const imgList = [
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/%E5%8C%BB%E9%99%A2%E7%B4%A0%E6%9D%90/%E6%96%B0%E4%B8%96%E7%BA%AA%E5%84%BF%E7%AB%A5.jpg',
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/baby/content/article/4b0006528da54d6da0fc10facc041965.jpg',
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/%E5%8C%BB%E9%99%A2%E7%B4%A0%E6%9D%90/%E6%80%A1%E5%BE%B71.png',
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/%E5%8C%BB%E9%99%A2%E7%B4%A0%E6%9D%90/%E8%8D%A3%E5%92%8C1.png',
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/%E5%8C%BB%E9%99%A2%E7%B4%A0%E6%9D%90/%E6%80%A1%E5%BE%B73.jpg',
+    'http://pddoc4comm.oss-cn-beijing.aliyuncs.com/%E5%8C%BB%E9%99%A2%E7%B4%A0%E6%9D%90/%E5%A5%A5%E4%B8%9C1.png'
+]
+
 const Test = () => {
 
     const [date, setDate] = React.useState('');
@@ -145,7 +154,14 @@ const Test = () => {
                 ))
             }
             <div className="img" ref={elm => lazyImg.current = elm}>lazy-img</div>
-            <ImgLazy style={{height: 80}} src="https://avatar-static.segmentfault.com/388/030/3880304376-54cef34ceff86_big64" />
+            {
+                imgList.map((src, idx) => (
+                    <div key={idx} >
+                        <ImgLazy style={{width: '100%'}} src={src} />
+                    </div>
+
+                ))
+            }
         </div>
     )
 }

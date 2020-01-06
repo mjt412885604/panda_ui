@@ -81,7 +81,7 @@ class ImgLazy extends React.Component {
     }
 
     render() {
-        const { src, className, alt, ...reset } = this.props
+        const { src, className, alt, style, inStyle } = this.props
         const { error, active, isLoad } = this.state
 
         if (error || !active || !isLoad) {
@@ -89,12 +89,12 @@ class ImgLazy extends React.Component {
                 <div
                     className="pandaui-imgLazy"
                     ref={elm => this.img = elm}
-                    {...reset}
+                    style={inStyle}
                 >{error ? '图片加载错误' : '加载中...'}</div>
             )
         }
         return (
-            <img src={src} alt={alt} {...reset} />
+            <img className={className} src={src} alt={alt} style={style} />
         )
     }
 }
