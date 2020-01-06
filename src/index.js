@@ -1,8 +1,10 @@
 import ActionSheet from './action-sheet'
 import Avatar from './avatar'
 import Button from './button'
+import CheckBox from './checkbox'
 import Dialog from './dialog'
 import Download from './download'
+import ImgLazy from './img-lazy'
 import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
@@ -21,8 +23,10 @@ export {
     ActionSheet,
     Avatar,
     Button,
+    CheckBox,
     Dialog,
     Download,
+    ImgLazy,
     ListEmpty,
     Loading,
     Mask,

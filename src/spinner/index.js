@@ -14,7 +14,7 @@ const Spinner = (props) => {
 
     const loadingIcon = () => {
         if (type == 'spinner') {
-            return [...Array(12)].map(item => <i key={item}></i>)
+            return [...Array(12)].map((item, index) => <i key={index}></i>)
         }
         return (
             <svg className="circular" viewBox="25 25 50 50">

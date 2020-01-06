@@ -37,4 +37,8 @@
             transform: translateX(1em);
         }
     }
+
+    &.disabled {
+        opacity: .5;
+    }
 }

@@ -54,6 +54,8 @@ declare class Button extends React.Component<ButtonProps>{
     render(): JSX.Element;
 }
 
+declare const CheckBox: React.FC<any>;
+
 export interface DialogButtons {
     label: string;
     onClick: (node: HTMLElement) => void;
@@ -83,6 +85,8 @@ export interface DownloadProps {
 declare class Download extends React.Component<DownloadProps> {
     render(): JSX.Element;
 }
+
+declare const ImgLazy:React.FC<any>;
 
 export interface ListEmptyProps {
     className?: string;
@@ -284,6 +288,7 @@ declare const Spinner: React.FC<SipnnerProps>;
 export interface SwitchProps {
     checked?: boolean;
     loading?: boolean;
+    disabled?: boolean;
     size?: number;
     className?: string;
     activeColor?: string;
@@ -313,8 +318,10 @@ export {
     ActionSheet,
     Avatar,
     Button,
+    CheckBox,
     Dialog,
     Download,
+    ImgLazy,
     ListEmpty,
     Loading,
     Mask,

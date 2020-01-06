@@ -5,7 +5,7 @@ import Spinner from '../spinner'
 import './style.scss'
 
 const Switch = (props) => {
-    const { checked, loading, size, activeColor, inActiveColor, className, onChange, style } = props
+    const { checked, loading, disabled, size, activeColor, inActiveColor, className, onChange, style } = props
 
     const _style = { ...style }
     if (size) {
@@ -14,10 +14,21 @@ const Switch = (props) => {
     _style.backgroundColor = checked ? activeColor : inActiveColor;
     _style.borderColor = checked ? activeColor : inActiveColor || 'rgba(0, 0, 0, 0.1)';
 
+    const onSwitchClick = () => {
+        if (!disabled) {
+            onChange()
+        }
+    }
+
     return (
         <div
-            className={classnames('pandaui-switch', className, checked && 'checked')}
-            onClick={onChange}
+            className={classnames(
+                'pandaui-switch',
+                className,
+                checked && 'checked',
+                disabled && 'disabled'
+            )}
+            onClick={onSwitchClick}
             style={_style}
         >
             <div className="pandaui-switch__node">
@@ -30,6 +41,7 @@ const Switch = (props) => {
 Switch.propTypes = {
     checked: PropTypes.bool,
     loading: PropTypes.bool,
+    disabled: PropTypes.bool,
     size: PropTypes.number,
     className: PropTypes.string,
     activeColor: PropTypes.string,
@@ -41,6 +53,7 @@ Switch.defaultProps = {
     className: '',
     checked: false,
     loading: false,
+    disabled: false,
     size: 30,
     activeColor: '#13C7CD',
     inActiveColor: '',

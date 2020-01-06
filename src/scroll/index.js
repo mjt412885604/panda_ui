@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import { throttle } from '../utils/utils'
 import './style.scss'
 
 class Scroll extends React.Component {
@@ -23,21 +24,6 @@ class Scroll extends React.Component {
 
     isScroll = false
 
-    /**
-     * 滚动截流
-     * @param {*} fn 
-     * @param {*} delay 
-     */
-    throttle = (fn, delay) => {
-        let timer = null
-        return function () {
-            clearTimeout(timer)
-            timer = setTimeout(function () {
-                fn()
-            }, delay)
-        }
-    }
-
     onscroll = () => {
         const Height = document.body.clientHeight // body体高度
         const scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset // 滚动距离顶部距离
@@ -51,7 +37,7 @@ class Scroll extends React.Component {
     }
 
     onWindowOnScrollInit = () => {
-        window.onscroll = this.throttle(this.onscroll, this.props.throttle)
+        window.onscroll = throttle(this.onscroll, this.props.throttle)
     }
 
     componentDidMount() {

@@ -15,7 +15,7 @@ const Dialog = (props) => {
 
     useEffect(() => {
         if (show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
-            document.body.className = document.body.className + 'pandaui-body-frozen'
+            document.body.className = document.body.className + ' pandaui-body-frozen'
         } else {
             destoryDialog()
         }

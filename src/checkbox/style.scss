@@ -1,0 +1,53 @@
+@import '../style/colors.scss';
+
+.pandaui-checkbox {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+
+    .pandaui-checkbox__content {
+        display: inline-block;
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: middle;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        border: 1px solid #d1d1d1;
+        border-radius: 3px;
+        transition: all .25s;
+        cursor: pointer;
+
+        .check {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            fill: $themeColor;
+            opacity: 0;
+            transition: opacity .25s;
+        }
+    }
+
+    .pandaui-checkbox__text {
+        padding-left: 5px;
+    }
+
+    &.round .pandaui-checkbox__content {
+        border-radius: 100%;
+    }
+
+    &.checked {
+        .pandaui-checkbox__content {
+            background-color: $themeColor;
+            border-color: $themeColor;
+
+            .check {
+                fill: #fff;
+                opacity: 1;
+            }
+        }
+    }
+}

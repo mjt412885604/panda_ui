@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Picker from '../picker'
-import { isObject, isArray } from './utils'
+import { isObject, isArray } from '../utils/utils'
 
 class PickerCascader extends React.Component {
 
