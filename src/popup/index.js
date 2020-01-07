@@ -9,8 +9,8 @@ const Popup = (props) => {
     const { className, title, scroll, subTitle, show, buttons, children, onCancel, ...rest } = props
 
     useEffect(() => {
-        if (show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
-            document.body.className = document.body.className + ' pandaui-body-frozen'
+        if (show && scroll && document.body.className.indexOf('pandaui-body-frozen') == -1) {
+            document.body.className = document.body.className + 'pandaui-body-frozen'
         } else {
             destoryDialog()
         }
@@ -21,7 +21,9 @@ const Popup = (props) => {
     }, [])
 
     const destoryDialog = () => {
-        document.body.className = document.body.className.replace(/pandaui-body-frozen/g, '')
+        if (document.body.className.indexOf('pandaui-body-frozen') > -1) {
+            document.body.className = document.body.className.replace(/pandaui-body-frozen/g, '')
+        }
     }
 
     const renderButtons = () => {

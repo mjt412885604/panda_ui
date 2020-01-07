@@ -14,15 +14,15 @@ const Dialog = (props) => {
     }, [])
 
     useEffect(() => {
-        if (show && document.body.className.indexOf('pandaui-body-frozen') == -1) {
-            document.body.className = document.body.className + ' pandaui-body-frozen'
+        if (show && scroll && document.body.className.indexOf('pandaui-body-frozen') == -1) {
+            document.body.className = document.body.className + 'pandaui-body-frozen'
         } else {
             destoryDialog()
         }
     }, [show])
 
     const destoryDialog = () => {
-        if (scroll) {
+        if (document.body.className.indexOf('pandaui-body-frozen') > -1) {
             document.body.className = document.body.className.replace(/pandaui-body-frozen/g, '')
         }
     }
