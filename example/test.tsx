@@ -94,7 +94,7 @@ const Test = () => {
 
             <div>
                 <CheckBox
-                    type="round"
+                disabled
                     checked={checkbox}
                     onChange={() => setCheckbox(!checkbox)}
                     style={{ width: 25, height: 25 }}

@@ -18,6 +18,7 @@ const CheckBox = (props) => {
                 'pandaui-checkbox',
                 className,
                 checked && 'checked',
+                disabled && 'disabled',
                 type == 'round' && 'round'
             )}
             onClick={onCheckboxChange}

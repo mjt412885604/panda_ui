@@ -5,6 +5,10 @@
     align-items: center;
     vertical-align: middle;
 
+    &.disabled {
+        opacity: 0.5;
+    }
+
     .pandaui-checkbox__content {
         display: inline-block;
         max-width: 100%;
