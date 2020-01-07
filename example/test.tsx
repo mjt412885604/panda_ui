@@ -5,11 +5,10 @@ import {
     PickerDate,
     Spinner,
     Switch,
-    CheckBox,
-    ImgLazy
-} from './components'
+    CheckBox
+} from '../src'
 import cnCity from './city'
-import { throttle } from './components/utils/utils'
+import LazyLoad from 'react-lazyload'
 
 const lists = [[{
     label: '火车1'
@@ -156,10 +155,9 @@ const Test = () => {
             <div className="img" ref={elm => lazyImg.current = elm}>lazy-img</div>
             {
                 imgList.map((src, idx) => (
-                    <div key={idx} >
-                        <ImgLazy style={{width: '100%'}} src={src} />
-                    </div>
-
+                    <LazyLoad key={idx} height={200}>
+                        <img style={{ height: 150, width: '100%' }} src={src} alt="" />
+                    </LazyLoad>
                 ))
             }
         </div>

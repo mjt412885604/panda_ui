@@ -4,7 +4,6 @@ import Button from './button'
 import CheckBox from './checkbox'
 import Dialog from './dialog'
 import Download from './download'
-import ImgLazy from './img-lazy'
 import ListEmpty from './list-empty'
 import Loading from './loading'
 import Mask from './mask'
@@ -26,7 +25,6 @@ export {
     CheckBox,
     Dialog,
     Download,
-    ImgLazy,
     ListEmpty,
     Loading,
     Mask,

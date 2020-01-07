@@ -86,8 +86,6 @@ declare class Download extends React.Component<DownloadProps> {
     render(): JSX.Element;
 }
 
-declare const ImgLazy:React.FC<any>;
-
 export interface ListEmptyProps {
     className?: string;
     empty?: boolean;
@@ -321,7 +319,6 @@ export {
     CheckBox,
     Dialog,
     Download,
-    ImgLazy,
     ListEmpty,
     Loading,
     Mask,
