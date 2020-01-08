@@ -1,0 +1,14 @@
+.pandaui-pullrefresh {
+
+    &__head {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        color: #969799;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

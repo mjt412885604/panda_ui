@@ -8,7 +8,7 @@ module.exports = {
     mode: 'development',
     bail: false,
     devtool: 'cheap-module-source-map',
-    entry: './example/index.js',
+    entry: './example',
     output: {
         path: '/',
         filename: 'bundle.js',
@@ -72,7 +72,6 @@ module.exports = {
         overlay: {
             errors: true
         },
-        open: true,
         hot: true
     }
 }

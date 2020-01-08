@@ -72,8 +72,9 @@ const App: React.FC = () => {
         rows={3}
         expandRender={(expand) => <span>{expand ? '收起' : '展开'}</span>}
       >{data}</Paragraph>
+      <Button loading={loading} onClick={onClickBtn}>text</Button>
+      <Button loading={loading} onClick={() => history.push('/refresh')}>refresh</Button>
       <ListEmpty show={empty}>
-        <Button loading={loading} onClick={onClickBtn}>232</Button>
         <ActionSheet menus={['男', '女']} title="请选择性别">ActionSheet</ActionSheet>
         <div>
           <Avatar icon="https://avatar-static.segmentfault.com/388/030/3880304376-54cef34ceff86_big64" vip />

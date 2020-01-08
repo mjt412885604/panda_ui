@@ -12,6 +12,7 @@ import Picker from './picker'
 import PickerCascader from './picker-cascader'
 import PickerDate from './picker-date'
 import Popup from './popup'
+import PullRefresh from './pull-refresh'
 import Scroll from './scroll'
 import Skeleton from './skeleton'
 import Spinner from './spinner'
@@ -33,6 +34,7 @@ export {
     PickerCascader,
     PickerDate,
     Popup,
+    PullRefresh,
     Scroll,
     Skeleton,
     Spinner,

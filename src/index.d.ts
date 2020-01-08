@@ -54,7 +54,16 @@ declare class Button extends React.Component<ButtonProps>{
     render(): JSX.Element;
 }
 
-declare const CheckBox: React.FC<any>;
+export interface CheckBoxProps {
+    checked?: boolean;
+    disabled?: boolean;
+    className?: string;
+    type?: 'round' | 'square';
+    style?: React.CSSProperties;
+    onChange?: () => void;
+}
+
+declare const CheckBox: React.FC<CheckBoxProps>;
 
 export interface DialogButtons {
     label: string;
@@ -241,6 +250,22 @@ declare class Popup extends React.Component<PopupProps> {
     render(): JSX.Element;
 }
 
+export interface PullRefreshProps {
+    className?: string;
+    pullingText?: string;
+    loosingText?: string;
+    loadingText?: string;
+    headHeight?: number;
+    disabled?: boolean;
+    loading?: boolean;
+    style?: React.CSSProperties;
+    onRefresh?: (onClose: any) => void;
+}
+
+declare class PullRefresh extends React.Component<PullRefreshProps> {
+    render(): JSX.Element;
+}
+
 export interface ScrollProps {
     loadMore: boolean;
     loadText?: string;
@@ -327,6 +352,7 @@ export {
     PickerCascader,
     PickerDate,
     Popup,
+    PullRefresh,
     Scroll,
     Skeleton,
     Spinner,
